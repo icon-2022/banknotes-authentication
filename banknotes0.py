@@ -1,8 +1,11 @@
+#!/usr/bin/python
 import csv
 import random
 import sys
 import pprint
 import time
+from tabulate import tabulate
+from numpy import *
 
 from sklearn import svm
 from sklearn.linear_model import Perceptron
@@ -25,11 +28,6 @@ learning models such as logistic regression and K-nearest neighbors to train an
 AI to classify banknotes.
 """
 
-# model = Perceptron()
-# model = svm.SVC()
-# model = KNeighborsClassifier(n_neighbors=1)
-# model = GaussianNB()
-model = None
 
 # Read data in from file
 """
@@ -69,11 +67,14 @@ training = data[holdout:]
 ]
 """
 
-# print(len(data), holdout)
+model = None
 
-# sys.exit()
+res = array([
+    ['Model','Correct','Incorrect','Accuracy (%)','Cost (s)'],
+    [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
 
 for x in range(4):
+
     if x == 0:
         model = Perceptron()
     if x == 1:
@@ -83,7 +84,7 @@ for x in range(4):
     if x == 3:
         model = GaussianNB()
 
-    print(f"X = {x}")
+    # print(f"X = {x}")
     t = time.process_time()
 
     # Train model on training set
@@ -108,8 +109,10 @@ for x in range(4):
             incorrect += 1
 
     # Print results
-    print(f"\tResults for model {type(model).__name__}")
-    print(f"\tCorrect: {correct}")
-    print(f"\tIncorrect: {incorrect}")
-    print(f"\tAccuracy: {100 * correct / total:.2f}%")
-    print(f"\tElapsed time: {time.process_time() - t}s")
+    res[x+1][0] = type(model).__name__
+    res[x+1][1] = correct
+    res[x+1][2] = incorrect
+    res[x+1][3] = f"{100 * correct / total:.2f}"
+    res[x+1][4] = f"{time.process_time() - t:.4f}"
+
+print (tabulate(res[1:], headers=res[0]))
