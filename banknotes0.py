@@ -76,11 +76,10 @@ training = data[holdout:]
 model = None
 
 res = array([
-    ['Model','Correct','Incorrect','Accuracy (%)','Cost (s)'],
+    ['Model','Correct','Incorrect','Accuracy (%)','Cost (ms)'],
     [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
 
 graf_res = array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
-nomi_graf = array(['Perceptron','SVC','KNeighborsCl','GaussianNB'])
 
 for x in range(4):
 
@@ -93,7 +92,6 @@ for x in range(4):
     if x == 3:
         model = GaussianNB()
 
-    # print(f"X = {x}")
     t = time.process_time()
 
     # Train model on training set
@@ -118,24 +116,25 @@ for x in range(4):
             incorrect += 1
 
     # Print results
+    accurance = 100 * correct / total
+    cost = int(1000 * (time.process_time() - t))
+
     res[x+1][0] = type(model).__name__
     res[x+1][1] = correct
     res[x+1][2] = incorrect
-    res[x+1][3] = f"{100 * correct / total:.2f}"
-    res[x+1][4] = f"{time.process_time() - t:.4f}"
+    res[x+1][3] = f"{accurance:.2f}"
+    res[x+1][4] = cost
 
     # Res for graphs
-
     graf_res[0][x] = correct
     graf_res[1][x] = incorrect
-    graf_res[2][x] = 100 * correct / total
-    graf_res[3][x] = time.process_time() - t
-
-
+    graf_res[2][x] = accurance
+    graf_res[3][x] = cost
 
 
 print (tabulate(res[1:], headers=res[0]))
 
+nomi_graf = [x[0] for x in res[1:]]
 
 x_pos = np.arange(len(nomi_graf))
 plt.bar(x_pos, graf_res[0], width=0.2, align='center', label='correct')
@@ -145,7 +144,6 @@ plt.xlabel('model')
 plt.title('Correct answers for model')
 plt.savefig('graph_corr.png')
 plt.clf()
-
 
 plt.bar(x_pos, graf_res[1], width=0.2, align='center', label='correct')
 plt.xticks(x_pos, nomi_graf)
@@ -165,11 +163,12 @@ plt.clf()
 
 plt.bar(x_pos, graf_res[3], width=0.2, align='center', label='correct')
 plt.xticks(x_pos, nomi_graf)
-plt.ylabel('seconds')
+plt.ylabel('millisecond')
 plt.xlabel('model')
 plt.title('Cost for model')
 plt.savefig('graph_cost.png')
 plt.clf()
+
 
 
 # grafico a barre
@@ -182,4 +181,3 @@ plt.clf()
 # plt.title('Risposte per metodo')
 # plt.legend()
 # plt.savefig('grafico_barre.png')
-
