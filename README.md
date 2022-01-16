@@ -13,11 +13,11 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
 ### 3. [Modellazione](#3)          
  1. [Importazione delle librerie](#3.1)          
  2. [Caricamento dataset](#3.2)
- 3. [Analisi dei dati](#3.3)             
- 4. [Preelaborazione dei dati](#3.4)
-     1.1 [Divisione dei dati](#3.4.1)               
- 5. [Addestramento del modello](#3.5)             
- 6. [Previsioni sul set di test](#3.6)             
+ 3. [Divisione degli attributi](#3.3)             
+ 4. [Separazione del dataset](#3.4)
+ 5. [Addestramento sul training set](#3.5)             
+ 6. [Predizione sul testing set](#3.6)             
+ 7. [Valutazione delle prestazioni](#3.7)             
 
 ### 4. [Conclusioni](#4)
               
@@ -35,20 +35,13 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
 <p><a href="#top">Torna all'inizio</a>
 
 # <span id = "3">3.Modellazione e analisi</span> 
-   
 ## <span id = "3.1">3.1 Importazione librerie</span> 
-  
 ## <span id = "3.2">3.2 Caricamento dataset</span>  
-  
-## <span id = "3.3">3.3 Analisi dei dati</span>  
-  
-## <span id = "3.4">3.4 Preelaborazione dei dati</span>
-  
-### <span id = "3.4.1">3.4.1 Divisione dei dati</span>
-  
-## <span id = "3.5">3.5 Addestramento del modello</span>
-## <span id = "3.6">3.6 Previsioni sul set di test</span>
-  
+## <span id = "3.3">3.3 Divisione degli attributi</span>  
+## <span id = "3.4">3.4 Separazione del dataset</span>
+## <span id = "3.5">3.5 Addestramento sul training set</span>
+## <span id = "3.6">3.6 Predizione sul testing set</span>
+## <span id = "3.7">3.7 Valutazione delle prestazioni</span>
 <a href="#top">Torna all'inizio</a>
 
 # <span id = "4">4. Conclusioni</span> 
