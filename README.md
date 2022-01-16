@@ -14,7 +14,11 @@
 
 ### 4. [Analisi](#4)
  1. [XXX](#4.1)  
-    1.1 [XXX](#4.1.1)      
+    1.1 [XXX](#4.1.1)
+
+### 5. [Conclusioni](#5)
+ 1. [XXX](#5.1)  
+    1.1 [XXX](#5.1.1)          
               
 # <span id = "1">1. Introduzione</span> 
 <p align="justify">Negli Stati Uniti c'è circa una banconota contraffatta ogni 10.000 banconote autentiche. Da quando negli ultimi anni è stato lanciato il servizio di deposito diretto in contanti ai bancomat, le banconote contraffatte sono diventate un problema non solo per i commercianti, ma anche per le banche. Sebbene siano quasi impossibili da identificare ad occhio nudo, l'elaborazione delle immagini è un metodo che può essere utilizzato per individuare le discrepanze nelle banconote contraffatte.</p>
@@ -51,3 +55,8 @@ requisiti di sistema/ambiente, le tecnologie e gli standard di cui il software d
 # <span id = "4">4. Analisi</span> 
 
 <a href="#top">Torna all'inizio</a> 
+
+# <span id = "5">5. Conclusioni</span> 
+
+<a href="#top">Torna all'inizio</a> 
+
