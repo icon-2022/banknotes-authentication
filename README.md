@@ -7,8 +7,8 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
 ### 1. [Introduzione](#1)  
   
 ### 2. [Metodologia](#2)  
- 1. [XXX](#2.1)  
-     1.1 [XXX](#2.1.1)  
+ 1. [](#2.1)  
+     1.1 [](#2.1.1)  
 
 ### 3. [Modellazione](#3)          
  1. [Importazione delle librerie](#3.1)          
@@ -82,7 +82,7 @@ with open("banknotes.csv") as f:
 ``` 
   
 ## <span id = "3.3">3.3 Divisione degli attributi</span>  
-In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco data = [].  
+In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco ``data = []`.  
   
 ``` 
     data = []
@@ -93,12 +93,64 @@ In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteris
             "label": "Authentic" if row[4] == "0" else "Counterfeit"
 ```
 
-Il ciclo `for` è l'indice che vogliamo filtrare dal nostro dataset, nella riga `"evidence": [float(cell) for cell in row[:4]]` filtriamo dalla colonna 0 alla colonna 3 che contiene l'insieme degli attributi evidenti. In "etichetta": "Autentico" se riga[4] == "0" altrimenti "contraffatto", abbiamo filtrato solo i record dalla colonna quattro che contiene le etichette (classe). Se l'etichetta è 0, la nota è autentica/reale e quando l'etichetta è 0, la nota è contraffatta/falsa.  
+Il ciclo `for` è l'indice che vogliamo filtrare dal nostro dataset, nella riga `"evidence": [float(cell) for cell in row[:4]]` filtriamo dalla colonna 0 alla colonna 3 che contiene l'insieme degli attributi evidenti. Nella riga `"label": "Authentic" if row[4] == "0" else "Counterfeit"`, abbiamo filtrato solo i record dalla colonna quattro che contiene le etichette (classe). Se l'etichetta è 0, la banconota è autentica e quando l'etichetta è 1, la banconota è contraffatta/falsa.  
   
 ## <span id = "3.4">3.4 Separazione del dataset</span>
+Il training set viene utilizzato per addestrare gli algoritmi di apprendimento automatico mentre il testing set viene utilizzato per valutare le prestazioni degli algoritmi di apprendimento automatico.
+``` 
+# Separate data into training and testing groups
+holdout = int(0.40 * len(data)) # prende 40% del dataset
+random.shuffle(data) # mischia dati
+testing = data[:holdout]
+training = data[holdout:]
+``` 
+Innanzitutto, calcoliamo la lunghezza dell'elenco di dati in `holdout = int(0.40 * len(data))` e mescoliamo gli elementi dei dati per prestazioni migliori utilizzando la funzione `random.shuffle()` dal modulo random. Quindi memorizziamo il 40% dei dati nel gruppo test e il 60% dei dati nel gruppo training.
+  
 ## <span id = "3.5">3.5 Addestramento sul training set</span>
+Il set di evidenze di training viene archiviato come `X_training`, mentre il set di etichette di training viene archiviato come `y_training`, quindi passato al metodo `fit()`.
+  
+ ``` 
+    # Train model on training set
+    X_training = [row["evidence"] for row in training]
+    y_training = [row["label"] for row in training]
+    model.fit(X_training, y_training)
+ ``` 
+ 
 ## <span id = "3.6">3.6 Predizione sul testing set</span>
+Dopo aver addestrato l'algoritmo, abbiamo eseguito previsioni sul set di test. Per fare previsioni, viene utilizzato il metodo "predict()". I record da prevedere vengono passati come parametri al metodo "predict()" come mostrato di seguito:
+ 
+  ```
+    # Make predictions on the testing set
+    X_testing = [row["evidence"] for row in testing]
+    y_testing = [row["label"] for row in testing]
+    predictions = model.predict(X_testing)
+```
+  
 ## <span id = "3.7">3.7 Valutazione delle prestazioni</span>
+Abbiamo valutato le prestazioni del modello attraverso un semplice codice Python:
+
+```
+    # Compute how well we performed
+    correct = 0
+    incorrect = 0
+    total = 0
+    for actual, predicted in zip(y_testing, predictions):
+        total += 1
+        if actual == predicted:
+            correct += 1
+        else:
+            incorrect += 1
+```
+e infine stampiamo l'accuratezza del modello per migliorarne la comprensione:
+```
+    res[x+1][0] = type(model).__name__
+    res[x+1][1] = correct
+    res[x+1][2] = incorrect
+    res[x+1][3] = f"{100 * correct / total:.2f}"
+    res[x+1][4] = f"{time.process_time() - t:.4f}"
+
+print (tabulate(res[1:], headers=res[0]))
+```
 <p><a href="#top">Torna all'inizio</a>
 
 # <span id = "4">4. Conclusioni</span> 
