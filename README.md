@@ -46,7 +46,7 @@ import time
 from tabulate import tabulate
 from numpy import *
 ```
- 
+  
 <p>Sono stati utilizzati gli algoritmi: Support Vector Machines, K Nearest Neighbor (1), Perceptron Learning e Gaussian Naive Bayes, i quattro più comuni per i problemi di classificazione dell'apprendimento automatico.
   
 ```
@@ -68,8 +68,33 @@ for x in range(4):
     if x == 3:
         model = GaussianNB()
  ``` 
+  
+Si noti che dopo aver importato gli algoritmi, possiamo scegliere quale modello utilizzare. Il resto del codice rimarrà lo stesso.
+  
 ## <span id = "3.2">3.2 Caricamento dataset</span>  
+Una volta importate le librerie, il passaggio successivo consiste nel caricare il dataset nella nostra applicazione. Quindi apriamo il file con le funzionalità di base del file python e utilizziamo la funzione `csv.reader()` del modulo csv, che legge il dataset nel formato CSV.
+  
+``` 
+# Read data from file
+with open("banknotes.csv") as f:
+    reader = csv.reader(f)
+    next(reader)
+``` 
+  
 ## <span id = "3.3">3.3 Divisione degli attributi</span>  
+In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco data = [].  
+  
+``` 
+    data = []
+    for row in reader:
+        # print(row)
+        data.append({
+            "evidence": [float(cell) for cell in row[:4]],
+            "label": "Authentic" if row[4] == "0" else "Counterfeit"
+```
+
+Il ciclo `for` è l'indice che vogliamo filtrare dal nostro dataset, nella riga `"evidence": [float(cell) for cell in row[:4]]` filtriamo dalla colonna 0 alla colonna 3 che contiene l'insieme degli attributi evidenti. In "etichetta": "Autentico" se riga[4] == "0" altrimenti "contraffatto", abbiamo filtrato solo i record dalla colonna quattro che contiene le etichette (classe). Se l'etichetta è 0, la nota è autentica/reale e quando l'etichetta è 0, la nota è contraffatta/falsa.  
+  
 ## <span id = "3.4">3.4 Separazione del dataset</span>
 ## <span id = "3.5">3.5 Addestramento sul training set</span>
 ## <span id = "3.6">3.6 Predizione sul testing set</span>
