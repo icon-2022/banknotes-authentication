@@ -11,12 +11,15 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
      1.1 [XXX](#2.1.1)  
 
 ### 3. [Modellazione](#3)          
- 1. [XXX](#3.1)          
- 2. [XXX](#3.2)             
+ 1. [Importazione delle librerie](#3.1)          
+ 2. [Caricamento dataset](#3.2)
+ 3. [Analisi dei dati](#3.3)             
+ 4. [Preelaborazione dei dati](#3.4)
+     1.1 [Divisione dei dati](#3.4.1)               
+ 5. [Addestramento del modello](#3.5)             
+ 6. [Previsioni sul set di test](#3.6)             
 
-### 4. [Analisi](#4)
-
-### 5. [Conclusioni](#5)    
+### 4. [Conclusioni](#4)
               
 # <span id = "1">1. Introduzione</span> 
 <p align="justify">Negli Stati Uniti c'è circa una banconota contraffatta ogni 10.000 banconote autentiche. Da quando negli ultimi anni è stato lanciato il servizio di deposito diretto in contanti ai bancomat, le banconote contraffatte sono diventate un problema non solo per i commercianti, ma anche per le banche. Sebbene siano quasi impossibili da identificare ad occhio nudo, l'elaborazione delle immagini è un metodo che può essere utilizzato per individuare le discrepanze nelle banconote contraffatte.</p>
@@ -31,16 +34,22 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
 ### <span id = "2.1.1">2.1.1 XXX</span>
 <p><a href="#top">Torna all'inizio</a>
 
-# <span id = "3">3.Modellazione</span> 
+# <span id = "3">3.Modellazione e analisi</span> 
    
-## <span id = "3.1">3.1 XXX</span> 
-
-## <span id = "3.2">3.2 XXX</span>  
+## <span id = "3.1">3.1 Importazione librerie</span> 
+  
+## <span id = "3.2">3.2 Caricamento dataset</span>  
+  
+## <span id = "3.3">3.3 Analisi dei dati</span>  
+  
+## <span id = "3.4">3.4 Preelaborazione dei dati</span>
+  
+### <span id = "3.4.1">3.4.1 Divisione dei dati</span>
+  
+## <span id = "3.5">3.5 Addestramento del modello</span>
+## <span id = "3.6">3.6 Previsioni sul set di test</span>
+  
 <a href="#top">Torna all'inizio</a>
 
-# <span id = "4">4. Analisi</span> 
+# <span id = "4">4. Conclusioni</span> 
 <a href="#top">Torna all'inizio</a> 
-
-# <span id = "5">5. Conclusioni</span> 
-<a href="#top">Torna all'inizio</a> 
-
