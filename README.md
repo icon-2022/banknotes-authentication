@@ -82,7 +82,7 @@ with open("banknotes.csv") as f:
 ``` 
   
 ## <span id = "3.3">3.3 Divisione degli attributi</span>  
-In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco ``data = []`.  
+In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco `data = []`.  
   
 ``` 
     data = []
