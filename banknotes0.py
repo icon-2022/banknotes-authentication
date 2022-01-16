@@ -4,6 +4,12 @@ import random
 import sys
 import pprint
 import time
+import numpy as np
+
+import matplotlib.pyplot as plt
+
+
+
 from tabulate import tabulate
 from numpy import *
 
@@ -73,6 +79,9 @@ res = array([
     ['Model','Correct','Incorrect','Accuracy (%)','Cost (s)'],
     [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
 
+graf_res = array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
+nomi_graf = array(['Perceptron','SVC','KNeighborsCl','GaussianNB'])
+
 for x in range(4):
 
     if x == 0:
@@ -115,4 +124,62 @@ for x in range(4):
     res[x+1][3] = f"{100 * correct / total:.2f}"
     res[x+1][4] = f"{time.process_time() - t:.4f}"
 
+    # Res for graphs
+
+    graf_res[0][x] = correct
+    graf_res[1][x] = incorrect
+    graf_res[2][x] = 100 * correct / total
+    graf_res[3][x] = time.process_time() - t
+
+
+
+
 print (tabulate(res[1:], headers=res[0]))
+
+
+x_pos = np.arange(len(nomi_graf))
+plt.bar(x_pos, graf_res[0], width=0.2, align='center', label='correct')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('n answers')
+plt.xlabel('model')
+plt.title('Correct answers for model')
+plt.savefig('graph_corr.png')
+plt.clf()
+
+
+plt.bar(x_pos, graf_res[1], width=0.2, align='center', label='correct')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('n answers')
+plt.xlabel('model')
+plt.title('Wrong answers for model')
+plt.savefig('graph_incorr.png')
+plt.clf()
+
+plt.bar(x_pos, graf_res[2], width=0.2, align='center', label='correct')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('accuracy in %')
+plt.xlabel('model')
+plt.title('Accuracy for model')
+plt.savefig('graph_acc.png')
+plt.clf()
+
+plt.bar(x_pos, graf_res[3], width=0.2, align='center', label='correct')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('seconds')
+plt.xlabel('model')
+plt.title('Cost for model')
+plt.savefig('graph_cost.png')
+plt.clf()
+
+
+# grafico a barre
+# x_pos = np.arange(len(nomi_graf))
+# plt.bar(x_pos-0.2, graf_res[0], width=0.2, align='center', label='correct')
+# plt.bar(x_pos, graf_res[1], width=0.2, align='center', label='incorrect')
+# plt.xticks(x_pos-0.1, nomi_graf)
+# plt.ylabel('n Risposte')
+# plt.xlabel('Metodo')
+# plt.title('Risposte per metodo')
+# plt.legend()
+# plt.savefig('grafico_barre.png')
+
