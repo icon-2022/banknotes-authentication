@@ -47,7 +47,7 @@ from tabulate import tabulate
 from numpy import *
 ```
   
-<p>Sono stati utilizzati gli algoritmi: Support Vector Machines, K Nearest Neighbor (1), Perceptron Learning e Gaussian Naive Bayes, i quattro più comuni per i problemi di classificazione dell'apprendimento automatico.
+<p align="justify">Sono stati utilizzati gli algoritmi: Support Vector Machines, K Nearest Neighbor (1), Perceptron Learning e Gaussian Naive Bayes, i quattro più comuni per i problemi di classificazione dell'apprendimento automatico:
   
 ```
 from sklearn import svm
@@ -69,10 +69,10 @@ for x in range(4):
         model = GaussianNB()
  ``` 
   
-Si noti che dopo aver importato gli algoritmi, possiamo scegliere quale modello utilizzare. Il resto del codice rimarrà lo stesso.
+<p align="justify">Si noti che dopo aver importato gli algoritmi, possiamo scegliere quale modello utilizzare. Il resto del codice rimarrà lo stesso.</p>
   
 ## <span id = "3.2">3.2 Caricamento dataset</span>  
-Una volta importate le librerie, il passaggio successivo consiste nel caricare il dataset nella nostra applicazione. Quindi apriamo il file con le funzionalità di base del file python e utilizziamo la funzione `csv.reader()` del modulo csv, che legge il dataset nel formato CSV.
+<p align="justify">Una volta importate le librerie, il passaggio successivo consiste nel caricare il dataset nella nostra applicazione. Quindi apriamo il file con le funzionalità di base del file python e utilizziamo la funzione `csv.reader()` del modulo csv, che legge il dataset nel formato CSV.</p>
   
 ``` 
 # Read data from file
@@ -82,7 +82,7 @@ with open("banknotes.csv") as f:
 ``` 
   
 ## <span id = "3.3">3.3 Divisione degli attributi</span>  
-In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco `data = []`.  
+<p align="justify">In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco `data = []`.  
   
 ``` 
     data = []
@@ -93,10 +93,11 @@ In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteris
             "label": "Authentic" if row[4] == "0" else "Counterfeit"
 ```
 
-Il ciclo `for` è l'indice che vogliamo filtrare dal nostro dataset, nella riga `"evidence": [float(cell) for cell in row[:4]]` filtriamo dalla colonna 0 alla colonna 3 che contiene l'insieme degli attributi evidenti. Nella riga `"label": "Authentic" if row[4] == "0" else "Counterfeit"`, abbiamo filtrato solo i record dalla colonna quattro che contiene le etichette (classe). Se l'etichetta è 0, la banconota è autentica e quando l'etichetta è 1, la banconota è contraffatta/falsa.  
+<p align="justify">Il ciclo `for` è l'indice che vogliamo filtrare dal nostro dataset, nella riga `"evidence": [float(cell) for cell in row[:4]]` filtriamo dalla colonna 0 alla colonna 3 che contiene l'insieme degli attributi evidenti. Nella riga `"label": "Authentic" if row[4] == "0" else "Counterfeit"`, abbiamo filtrato solo i record dalla colonna quattro che contiene le etichette (classe). Se l'etichetta è 0, la banconota è autentica e quando l'etichetta è 1, la banconota è contraffatta/falsa.</p>  
   
 ## <span id = "3.4">3.4 Separazione del dataset</span>
-Il training set viene utilizzato per addestrare gli algoritmi di apprendimento automatico mentre il testing set viene utilizzato per valutare le prestazioni degli algoritmi di apprendimento automatico.
+<p align="justify">Il training set viene utilizzato per addestrare gli algoritmi di apprendimento automatico mentre il testing set viene utilizzato per valutare le prestazioni degli algoritmi di apprendimento automatico.
+
 ``` 
 # Separate data into training and testing groups
 holdout = int(0.40 * len(data)) # prende 40% del dataset
@@ -104,10 +105,10 @@ random.shuffle(data) # mischia dati
 testing = data[:holdout]
 training = data[holdout:]
 ``` 
-Innanzitutto, calcoliamo la lunghezza dell'elenco di dati in `holdout = int(0.40 * len(data))` e mescoliamo gli elementi dei dati per prestazioni migliori utilizzando la funzione `random.shuffle()` dal modulo random. Quindi memorizziamo il 40% dei dati nel gruppo test e il 60% dei dati nel gruppo training.
+<p align="justify">Innanzitutto, calcoliamo la lunghezza dell'elenco di dati in `holdout = int(0.40 * len(data))` e mescoliamo gli elementi dei dati per prestazioni migliori utilizzando la funzione `random.shuffle()` dal modulo random. Quindi memorizziamo il 40% dei dati nel gruppo test e il 60% dei dati nel gruppo training.</p>
   
 ## <span id = "3.5">3.5 Addestramento sul training set</span>
-Il set di evidenze di training viene archiviato come `X_training`, mentre il set di etichette di training viene archiviato come `y_training`, quindi passato al metodo `fit()`.
+<p align="justify">Il set di evidenze di training viene archiviato come `X_training`, mentre il set di etichette di training viene archiviato come `y_training`, quindi passato al metodo `fit()`.
   
  ``` 
     # Train model on training set
@@ -117,9 +118,9 @@ Il set di evidenze di training viene archiviato come `X_training`, mentre il set
  ``` 
  
 ## <span id = "3.6">3.6 Predizione sul testing set</span>
-Dopo aver addestrato l'algoritmo, abbiamo eseguito previsioni sul set di test. Per fare previsioni, viene utilizzato il metodo "predict()". I record da prevedere vengono passati come parametri al metodo "predict()" come mostrato di seguito:
+<p align="justify">Dopo aver addestrato l'algoritmo, abbiamo eseguito previsioni sul set di test. Per fare previsioni, viene utilizzato il metodo `predict()`. I record da prevedere vengono passati come parametri al metodo "predict()" come mostrato di seguito:
  
-  ```
+```
     # Make predictions on the testing set
     X_testing = [row["evidence"] for row in testing]
     y_testing = [row["label"] for row in testing]
@@ -154,4 +155,5 @@ print (tabulate(res[1:], headers=res[0]))
 <p><a href="#top">Torna all'inizio</a>
 
 # <span id = "4">4. Conclusioni</span> 
+<p align="justify">In questo progetto abbiamo spiegato come abbiamo risolto il problema dell'autenticazione delle banconote utilizzando tecniche di machine learning. Abbiamo confrontato quattro diversi algoritmi in termini di prestazioni e abbiamo concluso che gli algoritmi KNN e SVM sono i migliori algoritmi per l'autenticazione delle banconote con una precisione del 100% e del 99,45%.</p>
 <p><a href="#top">Torna all'inizio</a>
