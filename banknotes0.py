@@ -116,19 +116,19 @@ for x in range(4):
             incorrect += 1
 
     # Print results
-    accurance = 100 * correct / total
+    accuracy = 100 * correct / total
     cost = int(1000 * (time.process_time() - t))
 
-    res[x+1][0] = type(model).__name__
+    res[x+1][0] = (type(model).__name__)[:12]
     res[x+1][1] = correct
     res[x+1][2] = incorrect
-    res[x+1][3] = f"{accurance:.2f}"
+    res[x+1][3] = f"{accuracy:.2f}"
     res[x+1][4] = cost
 
     # Res for graphs
     graf_res[0][x] = correct
     graf_res[1][x] = incorrect
-    graf_res[2][x] = accurance
+    graf_res[2][x] = accuracy
     graf_res[3][x] = cost
 
 
@@ -137,6 +137,7 @@ print (tabulate(res[1:], headers=res[0]))
 nomi_graf = [x[0] for x in res[1:]]
 
 x_pos = np.arange(len(nomi_graf))
+
 plt.bar(x_pos, graf_res[0], width=0.2, align='center', label='correct')
 plt.xticks(x_pos, nomi_graf)
 plt.ylabel('n answers')
