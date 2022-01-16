@@ -17,16 +17,11 @@
     1.1 [XXX](#4.1.1)      
               
 # <span id = "1">1. Introduzione</span> 
-Questo documento è una relazione tecnica finale per il progetto che implementa il gioco degli Scacchi del gruppo Thacker.     
-<p>Lo scopo di questo progetto è quello di creare un'applicazione, in completa conformità con il regolamento degli scacchi 
-FIDE, che possa essere utilizzata da utenti che abbiano una conoscenza almeno dilettantistica di quest'ultimo.   
-<p>L'applicazione può ricevere l'input in modalità interattiva, utilizzando la notazione algebrica italiana, oppure in   
-modalità batch con una partita registrata in formato PGN <em>(Portable Game Notation)</em>, utilizzando la notazione   
-algebrica inglese.   
-<p>Supporta partite interattive esclusivamente contro avversari umani.   
-<p>Si osserva che l'obiettivo di questo progetto è quello di dimostrare le competenze acquisite durante le lezioni del   
-corso di Ingegneria del Software, piuttosto che produrre una soluzione completa e avanzata.    
-
+<p style='text-align: justify;'> 
+<p>Negli Stati Uniti c'è circa una banconota contraffatta ogni 10.000 banconote autentiche. Da quando negli ultimi anni è stato lanciato il servizio di deposito diretto in contanti ai bancomat, le banconote contraffatte sono diventate un problema non solo per i commercianti, ma anche per le banche. Sebbene siano quasi impossibili da identificare ad occhio nudo, l'elaborazione delle immagini è un metodo che può essere utilizzato per individuare le discrepanze nelle banconote contraffatte.</p>
+<p>Dato un set di dati di oltre mille banconote con 4 attributi ciascuno, possiamo utilizzare modelli di apprendimento automatico come la regressione logistica e K-neirest neighbors per addestrare un'IA per classificare le banconote.</p>
+<p>Le immagini sono state tratte da banconote autentiche e contraffatte (n=1372). Ci sono quattro attributi in questo set di dati: varianza dell'immagine trasformata Wavelet (WTI), asimmetria del WTI, curvatura del WTI, entropia dell'immagine. L'ultima colonna è la classificazione della banconota (dove il valore 0 è falso e 1 è autentico). In matematica, una serie wavelet è una rappresentazione di una funzione di integrale quadrato (con valori reali o complessi) per determinate serie ortonormali generate da una wavelet. Queste wavelet di valori vengono definite utilizzando varianza e asimmetria vengono trasformate in valori di immagine. Qui il file csv di input è composto da 1372 istanze diviso in 4 valori come V1, V2, V3 e V4. Eccoci qui utilizzando solo i valori V1 e V2. I valori sono classificati in due classi 1 e 2.</p>
+</p>
 <a href="#top">Torna all'inizio</a> 
 
 # <span id = "2">2. Modello di dominio</span> 
