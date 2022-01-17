@@ -1,6 +1,6 @@
 # banknotes-authentication
 
-di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
+di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
 
 # Indice  
 
