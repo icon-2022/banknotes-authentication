@@ -208,7 +208,7 @@ w=0.3
 plt.xticks(x_pos + w /2, nomi_graf)
 acc = ax1.bar(x_pos, graf_res[2], width=w, color='b', align='center')
 ax2 = ax1.twinx()
-cost = ax2.bar(x_pos + w, graf_res[3], width=w, color='g', align='center')
+cost = ax2.bar(x_pos + w, graf_res[3], width=w, color='y', align='center')
 plt.ylabel('ms')
 plt.legend([acc, cost],['accuracy for model', 'cost for model'])
 
