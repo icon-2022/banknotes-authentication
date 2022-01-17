@@ -44,11 +44,19 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
 ## <span id = "2.2">2.2. Tecniche di ML</span> 
 ### <span id = "2.2.1">2.2.1 Support Vector Machine</span>
 ### <span id = "2.2.2">2.2.2 Perceptron</span>
+<p align="justify">Quello che si vuole fare è provare a usare una tecnica nota come regressione lineare per trovare una sorta di linea che separi le due metà l'una dall'altra. Il risultato, che dobbiamo solo confrontare: è maggiore di 0 o è inferiore a 0 per dire che non appartiene a un lato della linea o all'altro lato della linea.
+  
+
+
+
+  
 ### <span id = "2.2.3">2.2.3 Gaussian Naive Bayes</span>
 ### <span id = "2.2.4">2.2.4 KNearest Neighbors</span>
-<p align="justify">Questo tipo di algoritmo è un algoritmo di apprendimento automatico molto popolare. È un algoritmo per risolvere problemi di classificazione. Quello che fa è, dato un input, scegliere la classe del punto dati più vicino a quell'input. Per classe, qui intendiamo solo categoria, come contraffazione o non contraffazione. A seconda della risposta alla domanda, si è stati in grado di esprimere una sorta di giudizio.
-  
-<p align="justify">L'algoritmo di classificazione noto come algoritmo di classificazione del vicino più vicino, dove k è un parametro, un numero che scegliamo per quanti vicini vedremo. Con la classificazione k-vicino più vicino, dove k potrebbe essere tre o cinque o sette, per dire guardare i tre o cinque o sette vicini più vicini, i punti dati più vicini a quel punto, funziona in modo leggermente diverso. Questo algoritmo, ci viene fornito un input. Scegli la classe più comune tra i k punti dati più vicini a quell'input. E alla fine, scegli la categoria che ha il maggior numero di voti come conseguenza di ciò. Si scopre che questo può funzionare molto, molto bene per risolvere un'intera varietà di diversi tipi di problemi di classificazione.
+<p align="justify">I K esempi di training che hanno le caratteristiche di input più vicine all'esempio vengono usati per predire il valore per il nuovo esempio. La previsione potrebbe essere la moda, la media o una qualche interpolazione tra la previsione di questi K esempi di training.
+
+Affinché questo metodo funzioni, è necessaria una metrica della distanza che misuri la vicinanza di due esempi. Innanzitutto si definisce una metrica per il dominio di ciascuna caratteristica, in cui i valori delle caratteristiche vengono convertiti in una scala numerica che viene utilizzata per confrontare i valori. La distanza euclidea, la radice quadrata della somma dei quadrati delle differenze dimensionali, potrebbe essere utilizzata come distanza tra due esempi. Una questione importante sono le scale relative di diverse dimensioni; aumentando la scala di una dimensione aumenta l'importanza di quella caratteristica.
+
+I pesi delle caratteristiche possono essere forniti come input. È anche possibile imparare questi pesi. L'agente di apprendimento cercherà di trovare pesi che minimizzino l'errore nella previsione del valore di ciascun elemento del set di addestramento, sulla base di ogni altra istanza nel set di addestramento. Questa è un'istanza di convalida incrociata leave-one-out.
 
 <p align="justify">Quali sono gli svantaggi della classificazione k-neighbor più vicino? Uno è che è abbastanza lento dover attraversare e misurare la distanza tra un punto e ognuno di questi punti vicini. Ma ci sono modi per cercare di aggirarlo. Esistono strutture di dati che possono aiutare a rendere più rapidamente possibile trovare questi vicini. Ci sono anche tecniche che puoi usare per provare a sfoltire alcuni di questi dati, rimuovere alcuni dei punti dati in modo da rimanere solo con i punti dati rilevanti solo per renderlo un po' più semplice.
 <p><a href="#top">Torna all'inizio</a>
