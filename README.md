@@ -1,17 +1,18 @@
 # banknotes-authentication
 
-di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
+di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
 
 # Indice  
 
 ### 1. [Introduzione](#1)  
   
 ### 2. [Metodologia](#2) 
- 1. [Tecniche di ML](#2.1)  
-     1.1 [Support Vector Machine](#2.1.1)  
-     1.2 [Perceptron](#2.1.2)  
-     1.3 [Gaussian Naive Bayes](#2.1.3)  
-     1.4 [KNearest Neighbors](#2.1.4)  
+ 1. [Apprendimento](#2.1)  
+ 2. [Tecniche di ML](#2.2)  
+     2.1 [Support Vector Machine](#2.2.1)  
+     2.2 [Perceptron](#2.2.2)  
+     2.3 [Gaussian Naive Bayes](#2.2.3)  
+     2.4 [KNearest Neighbors](#2.2.4)  
 
 ### 3. [Modellazione](#3)          
  1. [Importazione delle librerie](#3.1)          
@@ -33,11 +34,23 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
 # <span id = "2">2. Metodologia</span>
 <p align="justify">I modelli sperimentali sono stati configurati utilizzando il metodo <code>holdout</code>. Questo metodo separa il dataset in due sottoinsiemi (rapporto 60:40) chiamati training set e testing set. Il training set viene utilizzato per addestrare il classificatore mentre il testing set viene utilizzato per stimare il tasso di errore del classificatore addestrato.
 
-## <span id = "2.1">2.1. Tecniche di ML</span> 
-### <span id = "2.1.1">2.1.1 Support Vector Machine</span>
-### <span id = "2.1.2">2.1.2 Perceptron</span>
-### <span id = "2.1.3">2.1.3 Gaussian Naive Bayes</span>
-### <span id = "2.1.4">2.1.4 KNearest Neighbors</span>
+## <span id = "2.1">2.1. Apprendimento</span>
+<p align="justify">L'apprendimento si riferisce al machine learning che generalmente con l'idea di non dare istruzioni esplicite al computer su come eseguire un compito, ma piuttosto dare al computer l'accesso alle informazioni sotto forma di dati da cui può imparare, e lasciare che il computer provi a capire quali siano gli schemi per cercare di svolgere un compito da solo.
+
+<p align="justify">L'apprendimento automatico è disponibile in diverse forme ed è un campo molto ampio. in questa sezione si definiscono alcuni degli algoritmi alla base di molte delle diverse aree dell'apprendimento automatico. Una delle branche più popolari è l'apprendimento supervisionato, che si riferisce all'attività in cui diamo al computer l'accesso a un dataset, in cui tale dataset è costituito da coppie input-output. L'obiettivo è che il computer (che la nostra intelligenza artificiale) sia in grado di capire le funzioni che associano gli input agli output, prevedendo quest'utlimo. Quindi si forniscono alcuni dati in modo che il computer possa addestrare il suo modello per capire come gli input e gli output sono in relazione tra loro. Infine si vuole che il computer sia in grado di capire la funzione che, dati quegli input, sia in grado di ottenere quegli output.
+
+<p align="justify">Uno dei compiti principali dell'apprendimento supervisionato è noto come classificazione. La classificazione è il problema in cui si vuole mappare l'input in categorie discrete, ed il compito del computer è proprio prevedere quali sono queste categorie. Un esempio è avere informazioni su una banconota e chiedere di prevedere se appartiene alla categoria delle banconote autentiche o appartiene alla categoria delle banconote contraffatte. È quindi necessario classificare l'input e addestrare il computer per essere in grado di eseguire quel calcolo. In questo caso i dati sono strutturati in una tabella con delle etichette, ovvero assiomi che l'umano ha constato.E quello che il computer dovrebbe fare allora è riuscire a capire, dati questi input, quale etichetta dovrebbe essere associata a quella banconota. 
+  
+## <span id = "2.2">2.2. Tecniche di ML</span> 
+### <span id = "2.2.1">2.2.1 Support Vector Machine</span>
+### <span id = "2.2.2">2.2.2 Perceptron</span>
+### <span id = "2.2.3">2.2.3 Gaussian Naive Bayes</span>
+### <span id = "2.2.4">2.2.4 KNearest Neighbors</span>
+<p align="justify">Questo tipo di algoritmo è un algoritmo di apprendimento automatico molto popolare. È un algoritmo per risolvere problemi di classificazione. Quello che fa è, dato un input, scegliere la classe del punto dati più vicino a quell'input. Per classe, qui intendiamo solo categoria, come contraffazione o non contraffazione. A seconda della risposta alla domanda, si è stati in grado di esprimere una sorta di giudizio.
+  
+<p align="justify">L'algoritmo di classificazione noto come algoritmo di classificazione del vicino più vicino, dove k è un parametro, un numero che scegliamo per quanti vicini vedremo. Con la classificazione k-vicino più vicino, dove k potrebbe essere tre o cinque o sette, per dire guardare i tre o cinque o sette vicini più vicini, i punti dati più vicini a quel punto, funziona in modo leggermente diverso. Questo algoritmo, ci viene fornito un input. Scegli la classe più comune tra i k punti dati più vicini a quell'input. E alla fine, scegli la categoria che ha il maggior numero di voti come conseguenza di ciò. Si scopre che questo può funzionare molto, molto bene per risolvere un'intera varietà di diversi tipi di problemi di classificazione.
+
+<p align="justify">Quali sono gli svantaggi della classificazione k-neighbor più vicino? Uno è che è abbastanza lento dover attraversare e misurare la distanza tra un punto e ognuno di questi punti vicini. Ma ci sono modi per cercare di aggirarlo. Esistono strutture di dati che possono aiutare a rendere più rapidamente possibile trovare questi vicini. Ci sono anche tecniche che puoi usare per provare a sfoltire alcuni di questi dati, rimuovere alcuni dei punti dati in modo da rimanere solo con i punti dati rilevanti solo per renderlo un po' più semplice.
 <p><a href="#top">Torna all'inizio</a>
 
 # <span id = "3">3.Modellazione e analisi</span> 
