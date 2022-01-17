@@ -63,25 +63,28 @@ training = data[holdout:]
 
 X = [row["evidence"] for row in data]
 
+attr = ['Variance', 'Skewness', 'Curtosis', 'Entropy', 'Class']
+
 plt.hist(X[0], bins='auto', density=True, stacked=True)
-plt.title('Histogram of Variance')
-plt.savefig('variance-histogram.png')
+plt.title(attr[0])
+plt.savefig(attr[0] + '-histogram.png')
 plt.close()
 
 plt.hist(X[1], bins='auto', density=True, stacked=True)
-plt.title('Histogram of skewness')
-plt.savefig('skewness-histogram.png')
+plt.title(attr[1])
+plt.savefig(attr[1] + '-histogram.png')
 plt.close()
 
 plt.hist(X[2], bins='auto', density=True, stacked=True)
-plt.title('Histogram of curtosis')
-plt.savefig('curtosis-histogram.png')
+plt.title(attr[2])
+plt.savefig(attr[2] + '-histogram.png')
 plt.close()
 
 plt.hist(X[3], bins='auto', density=True, stacked=True)
-plt.title('Histogram of entropy')
-plt.savefig('entropy-histogram.png')
+plt.title(attr[3])
+plt.savefig(attr[3] + '-histogram.png')
 plt.close()
+
 # pprint.pprint(data)
 """
 [
