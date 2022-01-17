@@ -5,7 +5,7 @@ import sys
 import pprint
 import time
 import numpy as np
-
+import pandas as pd
 import matplotlib.pyplot as plt
 
 
@@ -61,7 +61,27 @@ random.shuffle(data) # mischia dati
 testing = data[:holdout]
 training = data[holdout:]
 
+X = [row["evidence"] for row in data]
 
+plt.hist(X[0], bins='auto', density=True, stacked=True)
+plt.title('Histogram of Variance')
+plt.savefig('variance-histogram.png')
+plt.close()
+
+plt.hist(X[1], bins='auto', density=True, stacked=True)
+plt.title('Histogram of skewness')
+plt.savefig('skewness-histogram.png')
+plt.close()
+
+plt.hist(X[2], bins='auto', density=True, stacked=True)
+plt.title('Histogram of curtosis')
+plt.savefig('curtosis-histogram.png')
+plt.close()
+
+plt.hist(X[3], bins='auto', density=True, stacked=True)
+plt.title('Histogram of entropy')
+plt.savefig('entropy-histogram.png')
+plt.close()
 # pprint.pprint(data)
 """
 [
