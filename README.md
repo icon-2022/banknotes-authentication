@@ -6,9 +6,12 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
 
 ### 1. [Introduzione](#1)  
   
-### 2. [Metodologia](#2)  
- 1. [](#2.1)  
-     1.1 [](#2.1.1)  
+### 2. [Metodologia](#2) 
+ 1. [Tecniche di ML](#2.1)  
+     1.1 [Support Vector Machine](#2.1.1)  
+     1.2 [Perceptron](#2.1.2)  
+     1.3 [Gaussian Naive Bayes](#2.1.3)  
+     1.4 [KNearest Neighbors](#2.1.4)  
 
 ### 3. [Modellazione](#3)          
  1. [Importazione delle librerie](#3.1)          
@@ -27,9 +30,14 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. ]
 <p align="justify">Le immagini sono state tratte da banconote autentiche e contraffatte (n=1372). Ci sono quattro attributi in questo set di dati: varianza dell'immagine trasformata Wavelet (WTI), asimmetria del WTI, curvatura del WTI, entropia dell'immagine. L'ultima colonna è la classificazione della banconota (dove il valore 0 è falso e 1 è autentico). In matematica, una serie wavelet è una rappresentazione di una funzione di integrale quadrato (con valori reali o complessi) per determinate serie ortonormali generate da una wavelet.</p>
 <p><a href="#top">Torna all'inizio</a>
 
-# <span id = "2">2. Metodologia</span>      
-## <span id = "2.1">2.1. XXX</span> 
-### <span id = "2.1.1">2.1.1 XXX</span>
+# <span id = "2">2. Metodologia</span>
+<p align="justify">I modelli sperimentali sono stati configurati utilizzando il metodo <code>holdout</code>. Questo metodo separa il dataset in due sottoinsiemi (rapporto 60:40) chiamati training set e testing set. Il training set viene utilizzato per addestrare il classificatore mentre il testing set viene utilizzato per stimare il tasso di errore del classificatore addestrato.
+
+## <span id = "2.1">2.1. Tecniche di ML</span> 
+### <span id = "2.1.1">2.1.1 Support Vector Machine</span>
+### <span id = "2.1.2">2.1.2 Perceptron</span>
+### <span id = "2.1.3">2.1.3 Gaussian Naive Bayes</span>
+### <span id = "2.1.4">2.1.4 KNearest Neighbors</span>
 <p><a href="#top">Torna all'inizio</a>
 
 # <span id = "3">3.Modellazione e analisi</span> 
@@ -106,7 +114,7 @@ testing = data[:holdout]
 training = data[holdout:]
 ```
   
-<p align="justify">Innanzitutto, calcoliamo la lunghezza dell'elenco di dati in <code>holdout = int(0.40 * len(data))</code> e mescoliamo gli elementi dei dati per prestazioni migliori utilizzando la funzione <code>random.shuffle()</code> dal modulo random. Quindi memorizziamo il 40% dei dati nel gruppo test e il 60% dei dati nel gruppo training.</p>
+<p align="justify">Innanzitutto, calcoliamo la lunghezza dell'elenco di dati in <code>holdout = int(0.40 * len(data))</code> e mescoliamo gli elementi dei dati per prestazioni migliori utilizzando la funzione <code>random.shuffle()</code> dal modulo random. Quindi memorizziamo il 40% dei dati nel gruppo testing e il 60% dei dati nel gruppo training.</p>
   
 ## <span id = "3.5">3.5 Addestramento sul training set</span>
 <p align="justify">Il set di evidenze di training viene archiviato come <code>X_training</code>, mentre il set di etichette di training viene archiviato come <code>y_training</code>, quindi passato al metodo <code>fit()</code>.
