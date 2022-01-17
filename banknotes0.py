@@ -4,6 +4,12 @@ import random
 import sys
 import pprint
 import time
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+
 from tabulate import tabulate
 from numpy import *
 
@@ -55,6 +61,29 @@ random.shuffle(data) # mischia dati
 testing = data[:holdout]
 training = data[holdout:]
 
+X = [row["evidence"] for row in data]
+
+attr = ['Variance', 'Skewness', 'Curtosis', 'Entropy', 'Class']
+
+plt.hist(X[0], bins='auto', density=True, stacked=True)
+plt.title(attr[0])
+plt.savefig(attr[0] + '-histogram.png')
+plt.close()
+
+plt.hist(X[1], bins='auto', density=True, stacked=True)
+plt.title(attr[1])
+plt.savefig(attr[1] + '-histogram.png')
+plt.close()
+
+plt.hist(X[2], bins='auto', density=True, stacked=True)
+plt.title(attr[2])
+plt.savefig(attr[2] + '-histogram.png')
+plt.close()
+
+plt.hist(X[3], bins='auto', density=True, stacked=True)
+plt.title(attr[3])
+plt.savefig(attr[3] + '-histogram.png')
+plt.close()
 
 # pprint.pprint(data)
 """
@@ -70,8 +99,10 @@ training = data[holdout:]
 model = None
 
 res = array([
-    ['Model','Correct','Incorrect','Accuracy (%)','Cost (s)'],
+    ['Model','Correct','Incorrect','Accuracy (%)','Cost (ms)'],
     [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
+
+graf_res = array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
 
 for x in range(4):
 
@@ -84,7 +115,6 @@ for x in range(4):
     if x == 3:
         model = GaussianNB()
 
-    # print(f"X = {x}")
     t = time.process_time()
 
     # Train model on training set
@@ -109,10 +139,90 @@ for x in range(4):
             incorrect += 1
 
     # Print results
-    res[x+1][0] = type(model).__name__
+    accuracy = 100 * correct / total
+    cost = int(1000 * (time.process_time() - t))
+
+    res[x+1][0] = (type(model).__name__)[:12]
     res[x+1][1] = correct
     res[x+1][2] = incorrect
-    res[x+1][3] = f"{100 * correct / total:.2f}"
-    res[x+1][4] = f"{time.process_time() - t:.4f}"
+    res[x+1][3] = f"{accuracy:.2f}"
+    res[x+1][4] = cost
+
+    # Res for graphs
+    graf_res[0][x] = correct
+    graf_res[1][x] = incorrect
+    graf_res[2][x] = accuracy
+    graf_res[3][x] = cost
+
 
 print (tabulate(res[1:], headers=res[0]))
+
+nomi_graf = [x[0] for x in res[1:]]
+
+x_pos = np.arange(len(nomi_graf))
+
+plt.bar(x_pos, graf_res[0], width=0.2, align='center', label='correct')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('n answers')
+plt.xlabel('model')
+plt.title('Correct answers for model')
+plt.savefig('graph_corr.png')
+plt.clf()
+
+plt.bar(x_pos, graf_res[0], width=0.2, align='center', label='incorrect')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('n answers')
+plt.xlabel('model')
+plt.title('Wrong answers for model')
+plt.savefig('graph_incorr.png')
+plt.clf()
+
+plt.bar(x_pos, graf_res[0], width=0.2, align='center', label='correct')
+plt.bar(x_pos, graf_res[1], width=0.2, align='center', bottom=graf_res[0], label='incorrect')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('n answers')
+plt.xlabel('model')
+plt.title('Answers for model')
+plt.legend()
+plt.savefig('graph_cor_inc.png')
+plt.clf()
+
+plt.bar(x_pos, graf_res[2], width=0.2, align='center', label='correct')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('accuracy in %')
+plt.xlabel('model')
+plt.title('Accuracy for model')
+plt.savefig('graph_acc.png')
+plt.clf()
+
+plt.bar(x_pos, graf_res[3], width=0.2, align='center', label='correct')
+plt.xticks(x_pos, nomi_graf)
+plt.ylabel('millisecond')
+plt.xlabel('model')
+plt.title('Cost for model')
+plt.savefig('graph_cost.png')
+plt.close()
+
+ax1 = plt.subplot(1,1,1)
+w=0.3
+plt.xticks(x_pos + w /2, nomi_graf)
+acc = ax1.bar(x_pos, graf_res[2], width=w, color='b', align='center')
+ax2 = ax1.twinx()
+cost = ax2.bar(x_pos + w, graf_res[3], width=w, color='y', align='center')
+plt.ylabel('ms')
+plt.legend([acc, cost],['accuracy for model', 'cost for model'])
+
+plt.savefig('graph_acc_cost.png')
+plt.close()
+
+
+# grafico a barre
+# x_pos = np.arange(len(nomi_graf))
+# plt.bar(x_pos-0.2, graf_res[0], width=0.2, align='center', label='correct')
+# plt.bar(x_pos, graf_res[1], width=0.2, align='center', label='incorrect')
+# plt.xticks(x_pos-0.1, nomi_graf)
+# plt.ylabel('n Risposte')
+# plt.xlabel('Metodo')
+# plt.title('Risposte per metodo')
+# plt.legend()
+# plt.savefig('grafico_barre.png')
