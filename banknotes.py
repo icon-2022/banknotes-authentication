@@ -34,14 +34,7 @@ learning models such as logistic regression and K-nearest neighbors to train an
 AI to classify banknotes.
 """
 
-
 # Read data in from file
-"""
-The dataset contains 4 attributes (variance of Wavelet Transformed image (WTI),
-skewness of WTI, curtosis of WTI, entropy of image).
-The last column is the classification of the banknote
-(where a value of 0 is counterfeit and 1 is genuine).
-"""
 with open("banknotes.csv") as f:
     reader = csv.reader(f)
     next(reader)
@@ -54,6 +47,16 @@ with open("banknotes.csv") as f:
             "label": "Authentic" if row[4] == "0" else "Counterfeit"
         })
 
+# pprint.pprint(data)
+"""
+[
+  {
+   'evidence': [2.3718, 7.4908, 0.015989, -1.7414],
+   'label': 'Authentic'
+  },
+  ...
+]
+"""
 
 # Separate data into training and testing groups
 holdout = int(0.40 * len(data)) # prende 40% del dataset
@@ -65,36 +68,19 @@ X = [row["evidence"] for row in data]
 
 attr = ['Variance', 'Skewness', 'Curtosis', 'Entropy', 'Class']
 
-plt.hist(X[0], bins='auto', density=True, stacked=True)
-plt.title(attr[0])
-plt.savefig(attr[0] + '-histogram.png')
+# distribution of each of these attributes
+X = [row["evidence"] for row in data]
+fig, axarr = plt.subplots(2, 2, sharex='col', sharey='row')
+axarr[0, 0].hist([ r[0] for r in X], 30, density=True, stacked=True)
+axarr[0, 0].set_title(attr[0])
+axarr[0, 1].hist([ r[1] for r in X], 30, density=True, stacked=True)
+axarr[0, 1].set_title(attr[1])
+axarr[1, 0].hist([ r[2] for r in X], 30, density=True, stacked=True)
+axarr[1, 0].set_title(attr[2])
+axarr[1, 1].hist([ r[3] for r in X], 30, density=True, stacked=True)
+axarr[1, 1].set_title(attr[3])
+plt.savefig('distribution of each of these attributes.png')
 plt.close()
-
-plt.hist(X[1], bins='auto', density=True, stacked=True)
-plt.title(attr[1])
-plt.savefig(attr[1] + '-histogram.png')
-plt.close()
-
-plt.hist(X[2], bins='auto', density=True, stacked=True)
-plt.title(attr[2])
-plt.savefig(attr[2] + '-histogram.png')
-plt.close()
-
-plt.hist(X[3], bins='auto', density=True, stacked=True)
-plt.title(attr[3])
-plt.savefig(attr[3] + '-histogram.png')
-plt.close()
-
-# pprint.pprint(data)
-"""
-[
-  {
-   'evidence': [2.3718, 7.4908, 0.015989, -1.7414],
-   'label': 'Authentic'
-  },
-  ...
-]
-"""
 
 model = None
 
@@ -214,15 +200,3 @@ plt.legend([acc, cost],['accuracy for model', 'cost for model'])
 
 plt.savefig('graph_acc_cost.png')
 plt.close()
-
-
-# grafico a barre
-# x_pos = np.arange(len(nomi_graf))
-# plt.bar(x_pos-0.2, graf_res[0], width=0.2, align='center', label='correct')
-# plt.bar(x_pos, graf_res[1], width=0.2, align='center', label='incorrect')
-# plt.xticks(x_pos-0.1, nomi_graf)
-# plt.ylabel('n Risposte')
-# plt.xlabel('Metodo')
-# plt.title('Risposte per metodo')
-# plt.legend()
-# plt.savefig('grafico_barre.png')
