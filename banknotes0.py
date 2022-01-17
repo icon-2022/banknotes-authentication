@@ -201,8 +201,19 @@ plt.ylabel('millisecond')
 plt.xlabel('model')
 plt.title('Cost for model')
 plt.savefig('graph_cost.png')
-plt.clf()
+plt.close()
 
+ax1 = plt.subplot(1,1,1)
+w=0.3
+plt.xticks(x_pos + w /2, nomi_graf)
+acc = ax1.bar(x_pos, graf_res[2], width=w, color='b', align='center')
+ax2 = ax1.twinx()
+cost = ax2.bar(x_pos + w, graf_res[3], width=w, color='g', align='center')
+plt.ylabel('ms')
+plt.legend([acc, cost],['accuracy for model', 'cost for model'])
+
+plt.savefig('graph_acc_cost.png')
+plt.close()
 
 
 # grafico a barre
