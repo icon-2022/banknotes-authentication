@@ -18,11 +18,12 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
 ### 3. [Modellazione](#3)          
  1. [Importazione delle librerie](#3.1)          
  2. [Caricamento dataset](#3.2)
- 3. [Divisione degli attributi](#3.3)             
- 4. [Separazione del dataset](#3.4)
- 5. [Addestramento sul training set](#3.5)             
- 6. [Predizione sul testing set](#3.6)             
- 7. [Valutazione delle prestazioni](#3.7)             
+ 3. [Visualizzazione dei dati](#3.3)             
+ 4. [Divisione degli attributi](#3.4)             
+ 5. [Separazione del dataset](#3.5)
+ 6. [Addestramento sul training set](#3.6)             
+ 7. [Predizione sul testing set](#3.7)             
+ 8. [Valutazione delle prestazioni](#3.8)             
 
 ### 4. [Conclusioni](#4)
 
