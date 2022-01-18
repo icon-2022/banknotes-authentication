@@ -270,7 +270,7 @@ Per maggior leggibilità possiamo vedere le risposte corrette e incorrette degli
 
 ![CorrectIncorrect](graphs/graph_cor_inc.png)
 
-<p align="justify">In conclusione è importante valutare anche il costo di questi algoritmi in quanto migliori performance si traducono in costi computazionali maggiori e quindi lentezza.
+<p align="justify">In conclusione è importante valutare anche il costo di questi algoritmi in quanto migliori performance si traducono in costi computazionali maggiori e quindi lentezza. Il costo è misurato come tempo di esecuzione del modello in millisecondi
  
 ![AccuracyCost](graphs/graph_acc_cost.png)
 
