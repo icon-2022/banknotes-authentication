@@ -7,7 +7,7 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
 ### 1. [Introduzione](#1)  
   
 ### 2. [Metodologia](#2) 
- 1. [Apprendimento](#2.1)  
+ 1. [Apprendimento supervisionato](#2.1)  
  2. [Tecniche di ML](#2.2)  
      2.1 [Support Vector Machine](#2.2.1)  
      2.2 [Perceptron](#2.2.2)  
@@ -34,23 +34,28 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
 # <span id = "2">2. Metodologia</span>
 <p align="justify">I modelli sperimentali sono stati configurati utilizzando il metodo <code>holdout</code>. Questo metodo separa il dataset in due sottoinsiemi (rapporto 60:40) chiamati training set e testing set. Il training set viene utilizzato per addestrare il classificatore mentre il testing set viene utilizzato per stimare il tasso di errore del classificatore addestrato.
 
-## <span id = "2.1">2.1. Apprendimento</span>
-<p align="justify">L'apprendimento si riferisce al machine learning che generalmente con l'idea di non dare istruzioni esplicite al computer su come eseguire un compito, ma piuttosto dare al computer l'accesso alle informazioni sotto forma di dati da cui può imparare, e lasciare che il computer provi a capire quali siano gli schemi per cercare di svolgere un compito da solo.
+## <span id = "2.1">2.1. Apprendimento supervisionato</span>
+<p align="justify">L'apprendimento supervisionato è una tecnica di apprendimento automatico che mira a istruire un sistema informatico in modo da consentirgli di predire i valori di output di un sistema rispetto ad un input sulla base di una serie di esempi, costituiti da coppie di input e di output, che gli vengono inizialmente forniti. L'obiettivo è quindi predire i valori delle caratteristiche di output dalle caratteristiche di input. 
 
-<p align="justify">L'apprendimento automatico è disponibile in diverse forme ed è un campo molto ampio. in questa sezione si definiscono alcuni degli algoritmi alla base di molte delle diverse aree dell'apprendimento automatico. Una delle branche più popolari è l'apprendimento supervisionato, che si riferisce all'attività in cui diamo al computer l'accesso a un dataset, in cui tale dataset è costituito da coppie input-output. L'obiettivo è che il computer (che la nostra intelligenza artificiale) sia in grado di capire le funzioni che associano gli input agli output, prevedendo quest'utlimo. Quindi si forniscono alcuni dati in modo che il computer possa addestrare il suo modello per capire come gli input e gli output sono in relazione tra loro. Infine si vuole che il computer sia in grado di capire la funzione che, dati quegli input, sia in grado di ottenere quegli output.
+<p align="justify">Una caratteristica è una funzione da esempi in un valore. Il dominio di una caratteristica è l'insieme di valori che può restituire. 
 
-<p align="justify">Uno dei compiti principali dell'apprendimento supervisionato è noto come classificazione. La classificazione è il problema in cui si vuole mappare l'input in categorie discrete, ed il compito del computer è proprio prevedere quali sono queste categorie. Un esempio è avere informazioni su una banconota e chiedere di prevedere se appartiene alla categoria delle banconote autentiche o appartiene alla categoria delle banconote contraffatte. È quindi necessario classificare l'input e addestrare il computer per essere in grado di eseguire quel calcolo. In questo caso i dati sono strutturati in una tabella con delle etichette, ovvero assiomi che l'umano ha constato.E quello che il computer dovrebbe fare allora è riuscire a capire, dati questi input, quale etichetta dovrebbe essere associata a quella banconota. 
-  
+<p align="justify">In un task di apprendimento supervisionato, al sistema è dato 
+
+  - una serie di funzioni di input
+  - una serie di caratteristiche target
+  - una serie di esempi di addestramento, in cui vengono forniti i valori per le caratteristiche di input e le                 caratteristiche di output per ciascun esempio, e 
+  - una serie di esempi di test, in cui vengono forniti solo i valori per le caratteristiche di input. 
+
 ## <span id = "2.2">2.2. Tecniche di ML</span> 
-### <span id = "2.2.1">2.2.1 Support Vector Machine</span>
-### <span id = "2.2.2">2.2.2 Perceptron</span>
-<p align="justify">Quello che si vuole fare è provare a usare una tecnica nota come regressione lineare per trovare una sorta di linea che separi le due metà l'una dall'altra. Il risultato, che dobbiamo solo confrontare: è maggiore di 0 o è inferiore a 0 per dire che non appartiene a un lato della linea o all'altro lato della linea.
   
+### <span id = "2.2.1">2.2.1 Support Vector Machine</span>
+<p align="justify">Le macchine a vettori di supporto (SVM, dall'inglese Support Vector Machines) sono dei modelli di apprendimento supervisionato associati ad algoritmi di apprendimento per la regressione e la classificazione. Dato un insieme di esempi per l'addestramento, ognuno dei quali etichettato con la classe di appartenenza fra le due possibili classi, un algoritmo di addestramento per le SVM costruisce un modello che assegna i nuovi esempi a una delle due classi, ottenendo quindi un classificatore lineare binario non probabilistico. Un modello SVM è una rappresentazione degli esempi come punti nello spazio, mappati in modo tale che gli esempi appartenenti alle due diverse categorie siano chiaramente separati da uno spazio il più possibile ampio. I nuovi esempi sono quindi mappati nello stesso spazio e la predizione della categoria alla quale appartengono viene fatta sulla base del lato nel quale ricade.
 
-
-
+### <span id = "2.2.2">2.2.2 Perceptron</span>
+<p align="justify">Il perceptron è un algoritmo per l'apprendimento supervisionato di classificatori binari. Un classificatore binario è una funzione che può decidere se un input, rappresentato da un vettore di numeri, appartiene o meno a una classe specifica. È un tipo di classificatore lineare, ovvero un algoritmo di classificazione che effettua le sue previsioni sulla base di una funzione predittrice lineare che combina un insieme di pesi con il vettore delle caratteristiche.
   
 ### <span id = "2.2.3">2.2.3 Gaussian Naive Bayes</span>
+  
 ### <span id = "2.2.4">2.2.4 KNearest Neighbors</span>
 <p align="justify">I K esempi di training che hanno le caratteristiche di input più vicine all'esempio vengono usati per predire il valore per il nuovo esempio. La previsione potrebbe essere la moda, la media o una qualche interpolazione tra la previsione di questi K esempi di training.
 
@@ -138,7 +143,7 @@ training = data[holdout:]
 <p align="justify">Innanzitutto, calcoliamo la lunghezza dell'elenco di dati in <code>holdout = int(0.40 * len(data))</code> e mescoliamo gli elementi dei dati per prestazioni migliori utilizzando la funzione <code>random.shuffle()</code> dal modulo random. Quindi memorizziamo il 40% dei dati nel gruppo testing e il 60% dei dati nel gruppo training.</p>
   
 ## <span id = "3.5">3.5 Addestramento sul training set</span>
-<p align="justify">Il set di evidenze di training viene archiviato come <code>X_training</code>, mentre il set di etichette di training viene archiviato come <code>y_training</code>, quindi passato al metodo <code>fit()</code>.
+<p align="justify">Il set di evidenze di training viene archiviato come <code>X_training</code> (input), mentre il set di etichette di training viene archiviato come <code>y_training</code> (output), quindi passato al metodo <code>fit()</code>.
   
 ```
     # Train model on training set
