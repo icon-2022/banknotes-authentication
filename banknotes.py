@@ -17,22 +17,7 @@ from sklearn import svm
 from sklearn.linear_model import Perceptron
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
-
-
-"""
-seea also:
-https://github.com/DarkGoomba/scikit-learn-banknote/blob/master/Banknote%20Authentication.ipynb
-for some dettagle
-"""
-
-"""
-In the US there is about one counterfeit banknote for every 10,000 genuine banknotes.
-Although they are nearly impossible to identify with the naked eye, image
-processing is one method that can be used to spot discrepencies in counterfeit notes.
-Given a dataset of over a thousand notes with 4 attributes each, we can use machine
-learning models such as logistic regression and K-nearest neighbors to train an
-AI to classify banknotes.
-"""
+from sklearn.linear_model import LogisticRegression
 
 # Read data in from file
 with open("banknotes.csv") as f:
@@ -44,7 +29,10 @@ with open("banknotes.csv") as f:
         # print(row)
         data.append({
             "evidence": [float(cell) for cell in row[:4]],
-            "label": "Authentic" if row[4] == "0" else "Counterfeit"
+            "label": "Authentic" if row[4] == "0" else "Counterfeit",
+            # green Authentic - red Counterfeit
+            "color": (1, 0, 0) if row[4] == "0" else (0, 1, 0),
+            "class": row[4]
         })
 
 # pprint.pprint(data)
@@ -65,6 +53,7 @@ testing = data[:holdout]
 training = data[holdout:]
 
 X = [row["evidence"] for row in data]
+C = [row["color"] for row in data]
 
 attr = ['Variance', 'Skewness', 'Curtosis', 'Entropy', 'Class']
 
@@ -79,18 +68,28 @@ axarr[1, 0].hist([ r[2] for r in X], 30, density=True, stacked=True)
 axarr[1, 0].set_title(attr[2])
 axarr[1, 1].hist([ r[3] for r in X], 30, density=True, stacked=True)
 axarr[1, 1].set_title(attr[3])
-plt.savefig('graphs/distribution of each of these attributes.png')
+plt.savefig('graphs/distribution_attributes.png')
+plt.close()
+
+# scatter
+fig, axarr = plt.subplots(1, 2)
+axarr[0].scatter(x=[ r[0] for r in X],y=[ r[1] for r in X],c=C,s=15, cmap='PiYG', alpha=0.3)
+axarr[0].set(xlabel=attr[0], ylabel=attr[1])
+axarr[1].scatter(x=[ r[2] for r in X],y=[ r[3] for r in X],c=C,s=15, cmap='PiYG', alpha=0.3)
+axarr[1].set(xlabel=attr[2], ylabel=attr[3])
+fig.subplots_adjust(wspace=0.35)
+plt.savefig('graphs/scatter_plots.png')
 plt.close()
 
 model = None
 
 res = array([
     ['Model','Correct','Incorrect','Accuracy (%)','Cost (ms)'],
-    [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
+    [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
 
-graf_res = array([[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]])
+graf_res = array([[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]])
 
-for x in range(4):
+for x in range(5):
 
     if x == 0:
         model = Perceptron()
@@ -100,6 +99,8 @@ for x in range(4):
         model = KNeighborsClassifier(n_neighbors=1)
     if x == 3:
         model = GaussianNB()
+    if x == 4:
+        model = LogisticRegression()
 
     t = time.process_time()
 
@@ -199,4 +200,21 @@ plt.ylabel('ms')
 plt.legend([acc, cost],['accuracy for model', 'cost for model'])
 
 plt.savefig('graphs/graph_acc_cost.png')
+plt.close()
+
+
+df = pd.DataFrame(X)
+fig, ax = plt.subplots()
+logreg = LogisticRegression()
+logreg.fit(df.iloc[:,[0,1]],[row["class"] for row in data])
+xx, yy = np.mgrid[-7.5:7.5:0.01, -15:15:0.01]
+grid = np.c_[xx.ravel(), yy.ravel()]
+probs = logreg.predict_proba(grid)[:, 1].reshape(xx.shape)
+contour = ax.contourf(xx, yy, probs, 25, cmap='PiYG', vmin=0, vmax=1)
+axcontour = fig.colorbar(contour)
+axcontour.set_label('Probability')
+axcontour.set_ticks([0, 0.25, 0.5, 0.75, 1])
+ax.scatter(x=[ r[0] for r in X],y=[ r[1] for r in X],c=C, s=15, cmap='PiYG', alpha=0.3, vmin=-0.4, vmax=1.4, data=data)
+ax.set(xlabel=attr[0], ylabel=attr[1])
+plt.savefig('graphs/probability_logistic_regression.png')
 plt.close()
