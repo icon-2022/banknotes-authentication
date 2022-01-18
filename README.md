@@ -50,7 +50,17 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
 
 ### <span id = "2.2.1">2.2.1 Support Vector Machine</span>
 <p align="justify">Le macchine a vettori di supporto (SVM, dall'inglese Support Vector Machines) sono dei modelli di apprendimento supervisionato associati ad algoritmi di apprendimento per la regressione e la classificazione. Dato un insieme di esempi per l'addestramento, ognuno dei quali etichettato con la classe di appartenenza fra le due possibili classi, un algoritmo di addestramento per le SVM costruisce un modello che assegna i nuovi esempi a una delle due classi, ottenendo quindi un classificatore lineare binario non probabilistico. Un modello SVM è una rappresentazione degli esempi come punti nello spazio, mappati in modo tale che gli esempi appartenenti alle due diverse categorie siano chiaramente separati da uno spazio il più possibile ampio. I nuovi esempi sono quindi mappati nello stesso spazio e la predizione della categoria alla quale appartengono viene fatta sulla base del lato nel quale ricade.
+ 
+I vantaggi delle macchine a vettore di supporto sono: 
+ - Efficace in spazi ad alta dimensione. 
+ - Efficace nei casi in cui il numero di dimensioni è maggiore del numero di campioni. 
 
+Utilizza un sottoinsieme di punti di addestramento nella funzione decisionale (chiamati vettori di supporto), quindi è anche efficiente in termini di memoria.
+ 
+Gli svantaggi delle macchine vettoriali di supporto includono: 
+ - Se il numero di funzionalità è molto maggiore del numero di campioni, evitare un adattamento eccessivo nella scelta delle funzioni del kernel e il termine di regolarizzazione è   fondamentale. 
+
+SVC è una classe in grado di eseguire la classificazione binaria e multiclasse su un dataset.
 ### <span id = "2.2.2">2.2.2 Perceptron</span>
 <p align="justify">Il perceptron è un algoritmo per l'apprendimento supervisionato di classificatori binari. Un classificatore binario è una funzione che può decidere se un input, rappresentato da un vettore di numeri, appartiene o meno a una classe specifica. È un tipo di classificatore lineare, ovvero un algoritmo di classificazione che effettua le sue previsioni sulla base di una funzione predittrice lineare che combina un insieme di pesi con il vettore delle caratteristiche.
 
