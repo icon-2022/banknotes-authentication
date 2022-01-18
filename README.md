@@ -61,17 +61,23 @@ Gli svantaggi delle macchine vettoriali di supporto includono:
  - Se il numero di funzionalità è molto maggiore del numero di campioni, evitare un adattamento eccessivo nella scelta delle funzioni del kernel e il termine di regolarizzazione è   fondamentale. 
 
 SVC è una classe in grado di eseguire la classificazione binaria e multiclasse su un dataset.
+ 
 ### <span id = "2.2.2">2.2.2 Perceptron</span>
-<p align="justify">Il perceptron è un algoritmo per l'apprendimento supervisionato di classificatori binari. Un classificatore binario è una funzione che può decidere se un input, rappresentato da un vettore di numeri, appartiene o meno a una classe specifica. È un tipo di classificatore lineare, ovvero un algoritmo di classificazione che effettua le sue previsioni sulla base di una funzione predittrice lineare che combina un insieme di pesi con il vettore delle caratteristiche.
+<p align="justify">Il Perceptron è un altro algoritmo di classificazione supervisionato di classificatori binari adatto per l'apprendimento su larga scala. Un classificatore binario è una funzione che può decidere se un input, rappresentato da un vettore di numeri, appartiene o meno a una classe specifica. È un tipo di classificatore lineare, ovvero un algoritmo di classificazione che effettua le sue previsioni sulla base di una funzione predittrice lineare che combina un insieme di pesi con il vettore delle caratteristiche.
 
 ### <span id = "2.2.3">2.2.3 Gaussian Naive Bayes</span>
+<p align="justify">I metodi Naive Bayes sono un insieme di algoritmi di apprendimento supervisionato basati sull'applicazione del teorema di Bayes con l'assunzione "ingenua" dell'indipendenza condizionale tra ogni coppia di caratteristiche dato il valore della variabile di classe.
+
+Nonostante i loro presupposti semplificati, i classificatori naive di Bayes hanno funzionato abbastanza bene in molte situazioni del mondo reale, notoriamente la classificazione dei documenti e il filtraggio dello spam. Richiedono una piccola quantità di dati di addestramento per stimare i parametri necessari. I learner e i classificatori di Naive Bayes possono essere estremamente veloci rispetto a metodi più sofisticati. Il disaccoppiamento delle distribuzioni delle caratteristiche condizionali di classe significa che ciascuna distribuzione può essere stimata in modo indipendente come una distribuzione unidimensionale. Questo a sua volta aiuta ad alleviare i problemi derivanti dalla maledizione della dimensionalità. D'altra parte, sebbene il Naive Bayes sia noto come un classificatore discreto, è noto per essere un cattivo stimatore, quindi i risultati di probabilità non devono essere presi troppo sul serio.
+
+`GaussianNB` implementa l'algoritmo Gaussian Naive Bayes per la classificazione.
 
 ### <span id = "2.2.4">2.2.4 KNearest Neighbors</span>
-<p align="justify">I K esempi di training che hanno le caratteristiche di input più vicine all'esempio vengono usati per predire il valore per il nuovo esempio. La previsione potrebbe essere la moda, la media o una qualche interpolazione tra la previsione di questi K esempi di training.
+<p align="justify">Il principio alla base dei metodi del vicino più vicino è trovare un numero predefinito di campioni di addestramento più vicini alla distanza al nuovo punto e prevedere l'etichetta da questi. Il numero di campioni può essere una costante definita dall'utente (apprendimento del vicino più vicino k) o variare in base alla densità locale dei punti (apprendimento del vicino più vicino basato sul raggio). La distanza può, in generale, essere qualsiasi misura metrica: la distanza euclidea standard è la scelta più comune. I metodi basati sui vicini sono noti come metodi di apprendimento automatico non generalizzanti, poiché semplicemente "ricordano" tutti i suoi dati di addestramento (possibilmente trasformati in una struttura di indicizzazione veloce come un albero a sfere o un albero di KD). Nonostante la sua semplicità, i vicini più vicini hanno avuto successo in un gran numero di problemi di classificazione e regressione. Essendo un metodo non parametrico, ha spesso successo in situazioni di classificazione in cui il confine decisionale è molto irregolare.
 
-Affinché questo metodo funzioni, è necessaria una metrica della distanza che misuri la vicinanza di due esempi. Innanzitutto si definisce una metrica per il dominio di ciascuna caratteristica, in cui i valori delle caratteristiche vengono convertiti in una scala numerica che viene utilizzata per confrontare i valori. La distanza euclidea, la radice quadrata della somma dei quadrati delle differenze dimensionali, potrebbe essere utilizzata come distanza tra due esempi. Una questione importante sono le scale relative di diverse dimensioni; aumentando la scala di una dimensione aumenta l'importanza di quella caratteristica.
-
-I pesi delle caratteristiche possono essere forniti come input. È anche possibile imparare questi pesi. L'agente di apprendimento cercherà di trovare pesi che minimizzino l'errore nella previsione del valore di ciascun elemento del set di addestramento, sulla base di ogni altra istanza nel set di addestramento. Questa è un'istanza di convalida incrociata leave-one-out.
+La classificazione basata sui vicini è un tipo di apprendimento basato su istanze o apprendimento non generalizzante: non tenta di costruire un modello interno generale, ma memorizza semplicemente istanze dei dati di addestramento. La classificazione è calcolata da un voto a maggioranza semplice dei vicini più vicini di ciascun punto: a un punto di interrogazione viene assegnata la classe di dati che ha il maggior numero di rappresentanti all'interno dei vicini più vicini del punto. scikit-learn implementa due diversi classificatori dei vicini più vicini: KNeighborsClassifier implementa l'apprendimento basato sui vicini più vicini di ciascun punto di query, dove è un valore intero specificato dall'utente. La classificazione -neighbors in KNeighborsClassifier è la tecnica più comunemente usata. La scelta ottimale del valore è fortemente dipendente dai dati: in generale un valore più grande sopprime gli effetti del rumore, ma rende meno distinti i confini della classificazione. 
+ 
+La classificazione di base dei vicini più vicini utilizza pesi uniformi: ovvero, il valore assegnato a un punto di query viene calcolato da un voto a maggioranza semplice dei vicini più vicini. In alcune circostanze, è meglio ponderare i vicini in modo tale che i vicini più vicini contribuiscano di più all'adattamento. Questo può essere ottenuto attraverso la parola chiave weights. Il valore predefinito, weights = 'uniform', assegna pesi uniformi a ciascun neighbor. pesi = 'distanza' assegna pesi proporzionali all'inverso della distanza dal punto di interrogazione. In alternativa, è possibile fornire una funzione definita dall'utente della distanza per calcolare i pesi.
 
 <p align="justify">Quali sono gli svantaggi della classificazione k-neighbor più vicino? Uno è che è abbastanza lento dover attraversare e misurare la distanza tra un punto e ognuno di questi punti vicini. Ma ci sono modi per cercare di aggirarlo. Esistono strutture di dati che possono aiutare a rendere più rapidamente possibile trovare questi vicini. Ci sono anche tecniche che puoi usare per provare a sfoltire alcuni di questi dati, rimuovere alcuni dei punti dati in modo da rimanere solo con i punti dati rilevanti solo per renderlo un po' più semplice.
 <p><a href="#top">Torna all'inizio</a>
@@ -87,21 +93,28 @@ import random
 import sys
 import pprint
 import time
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+
 from tabulate import tabulate
 from numpy import *
 ```
 
-<p align="justify">Sono stati utilizzati gli algoritmi: Support Vector Machines, K Nearest Neighbor (1), Perceptron Learning e Gaussian Naive Bayes, i quattro più comuni per i problemi di classificazione dell'apprendimento automatico:
+<p align="justify">Sono stati utilizzati gli algoritmi: Support Vector Machines, K Nearest Neighbor (1), Perceptron Learning, Gaussian Naive Bayes e logistic Regression, i cinque più comuni per i problemi di classificazione dell'apprendimento automatico:
 
 ```
 from sklearn import svm
 from sklearn.linear_model import Perceptron
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.linear_model import LogisticRegression
 
 ︙
 
-for x in range(4):
+for x in range(5):
 
     if x == 0:
         model = Perceptron()
@@ -111,6 +124,8 @@ for x in range(4):
         model = KNeighborsClassifier(n_neighbors=1)
     if x == 3:
         model = GaussianNB()
+    if x == 4:
+        model = LogisticRegression()
 ```
 
 <p align="justify">Si noti che dopo aver importato gli algoritmi, possiamo scegliere quale modello utilizzare. Il resto del codice rimarrà lo stesso.</p>
@@ -124,8 +139,16 @@ with open("banknotes.csv") as f:
     reader = csv.reader(f)
     next(reader)
 ```
+## <span id = "3.3">3.3 Visualizzazione dei dati</span>
+Per capire meglio i dati si traccia un grafico della distribuzione di ciascuno degli attributi
 
-## <span id = "3.3">3.3 Divisione degli attributi</span>  
+![Distribution](graphs/distribution_attributes.png)
+
+Di seguito sono riportati grafici a dispersione di banconote autentiche in verde e banconote false in rosso. Notare il netto contrasto nella trama di sinistra e la quasi indistinguibilità nell'altra. Questa osservazione ci dice che l'IA farà più affidamento su quella di sinistra per le informazioni rispetto a quella di destra.
+
+![BanknotesScatterPlot](graphs/scatter_plots.png)
+
+## <span id = "3.4">3.4 Divisione degli attributi</span>  
 <p align="justify">In questo dataset, varianza, inclinazione, curvatura ed entropia sono caratteristiche mentre la colonna della classe contiene l'etichetta. Lo script seguente, insieme alla parte sopra menzionata, divide i dati in evidenze e etichette. Quindi archivia le evidenze e l'etichetta in una elenco <code>data = []</code>.  
 
 ```
@@ -134,12 +157,15 @@ with open("banknotes.csv") as f:
         # print(row)
         data.append({
             "evidence": [float(cell) for cell in row[:4]],
-            "label": "Authentic" if row[4] == "0" else "Counterfeit"
+            "label": "Authentic" if row[4] == "0" else "Counterfeit",
+            # green Authentic - red Counterfeit
+            "color": (1, 0, 0) if row[4] == "0" else (0, 1, 0),
+            "class": row[4]
 ```
 
 <p align="justify">Il ciclo <code>for</code> è l'indice che vogliamo filtrare dal nostro dataset, nella riga <code>"evidence": [float(cell) for cell in row[:4]]</code> filtriamo dalla colonna 0 alla colonna 3 che contiene l'insieme degli attributi evidenti. Nella riga <code>"label": "Authentic" if row[4] == "0" else "Counterfeit"</code>, abbiamo filtrato solo i record dalla colonna quattro che contiene le etichette (classe). Se l'etichetta è 0, la banconota è autentica e quando l'etichetta è 1, la banconota è contraffatta/falsa.</p>  
 
-## <span id = "3.4">3.4 Separazione del dataset</span>
+## <span id = "3.5">3.5 Separazione del dataset</span>
 <p align="justify">Il training set viene utilizzato per addestrare gli algoritmi di apprendimento automatico mentre il testing set viene utilizzato per valutare le prestazioni degli algoritmi di apprendimento automatico.
 
 ```
@@ -152,7 +178,7 @@ training = data[holdout:]
 
 <p align="justify">Innanzitutto, calcoliamo la lunghezza dell'elenco di dati in <code>holdout = int(0.40 * len(data))</code> e mescoliamo gli elementi dei dati per prestazioni migliori utilizzando la funzione <code>random.shuffle()</code> dal modulo random. Quindi memorizziamo il 40% dei dati nel gruppo testing e il 60% dei dati nel gruppo training.</p>
 
-## <span id = "3.5">3.5 Addestramento sul training set</span>
+## <span id = "3.6">3.6 Addestramento sul training set</span>
 <p align="justify">Il set di evidenze di training viene archiviato come <code>X_training</code> (input), mentre il set di etichette di training viene archiviato come <code>y_training</code> (output), quindi passato al metodo <code>fit()</code>.
 
 ```
@@ -162,7 +188,7 @@ training = data[holdout:]
     model.fit(X_training, y_training)
 ```
 
-## <span id = "3.6">3.6 Predizione sul testing set</span>
+## <span id = "3.7">3.7 Predizione sul testing set</span>
 <p align="justify">Dopo aver addestrato l'algoritmo, abbiamo eseguito previsioni sul set di test. Per fare previsioni, viene utilizzato il metodo <code>predict()</code>. I record da prevedere vengono passati come parametri al metodo <code>predict()</code> come mostrato di seguito:
 
 ```
@@ -172,7 +198,7 @@ training = data[holdout:]
     predictions = model.predict(X_testing)
 ```
 
-## <span id = "3.7">3.7 Valutazione delle prestazioni</span>
+## <span id = "3.8">3.8 Valutazione delle prestazioni</span>
 Abbiamo valutato le prestazioni del modello attraverso un semplice codice Python:
 
 ```
