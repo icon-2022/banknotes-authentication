@@ -1,6 +1,7 @@
 # banknotes-authentication
 
-di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
+Stolbovoi Nicole    [MAT. 709168]    n.stolbovoi@studenti.uniba.it 
+Zeverino Luca       [MAT. 698710] 	  l.zeverino1@studenti.uniba.it
 
 # Indice  
 
