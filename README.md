@@ -1,7 +1,7 @@
 # banknotes-authentication
 
-Stolbovoi Nicole    [MAT. 709168]    n.stolbovoi@studenti.uniba.it 
-Zeverino Luca       [MAT. 698710] 	  l.zeverino1@studenti.uniba.it
+<p>Stolbovoi Nicole    [MAT. 709168]    n.stolbovoi@studenti.uniba.it 
+<p>Zeverino Luca       [MAT. 698710] 	  l.zeverino1@studenti.uniba.it
 
 # Indice  
 
