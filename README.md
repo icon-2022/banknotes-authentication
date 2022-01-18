@@ -243,8 +243,6 @@ print (tabulate(res[1:], headers=res[0]))
 # <span id = "4">4. Conclusioni</span>
 <p align="justify">In questo progetto abbiamo spiegato come abbiamo risolto il problema dell'autenticazione delle banconote utilizzando tecniche di machine learning. Abbiamo confrontato quattro diversi algoritmi in termini di prestazioni e abbiamo concluso che gli algoritmi KNN e SVM sono i migliori algoritmi per l'autenticazione delle banconote con una precisione del 100% e del 99,64%.</p>
 
-<p align="justify">In conclusione è importante valutare anche il costo di questi algoritmi in quanto migliori performance si traducono in costi computazionali maggiori e quindi lentezza.
-
 ```
 Model           Correct    Incorrect    Accuracy (%)    Cost (ms)
 ------------  ---------  -----------  --------------  -----------
@@ -254,4 +252,11 @@ KNeighborsCl        548            0          100              62
 GaussianNB          465           83           84.85            6
 LogisticRegr        543            5           99.09           24
 ```
+
+Per maggior leggibilità possiamo vedere le risposte corrette e incorrette degli algoritmi in questo grafico:
+![CorrectIncorrect](graphs/graph_cor_inc.png)
+<p align="justify">In conclusione è importante valutare anche il costo di questi algoritmi in quanto migliori performance si traducono in costi computazionali maggiori e quindi lentezza.
+ 
+![AccuracyCost](graphs/graph_acc_cost.png)
+
 <p><a href="#top">Torna all'inizio</a>
