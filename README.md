@@ -264,7 +264,9 @@ LogisticRegr        543            5           99.09           24
 ```
 
 Per maggior leggibilità possiamo vedere le risposte corrette e incorrette degli algoritmi in questo grafico:
+
 ![CorrectIncorrect](graphs/graph_cor_inc.png)
+
 <p align="justify">In conclusione è importante valutare anche il costo di questi algoritmi in quanto migliori performance si traducono in costi computazionali maggiori e quindi lentezza.
  
 ![AccuracyCost](graphs/graph_acc_cost.png)
