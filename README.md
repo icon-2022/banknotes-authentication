@@ -229,11 +229,21 @@ Abbiamo valutato le prestazioni del modello attraverso un semplice codice Python
 e infine stampiamo l'accuratezza del modello per migliorarne la comprensione:
 
 ```
-    res[x+1][0] = type(model).__name__
+ # Print results
+    accuracy = 100 * correct / total
+    cost = int(1000 * (time.process_time() - t))
+
+    res[x+1][0] = (type(model).__name__)[:12]
     res[x+1][1] = correct
     res[x+1][2] = incorrect
-    res[x+1][3] = f"{100 * correct / total:.2f}"
-    res[x+1][4] = f"{time.process_time() - t:.4f}"
+    res[x+1][3] = f"{accuracy:.2f}"
+    res[x+1][4] = cost
+ 
+    # Res for graphs
+    graf_res[0][x] = correct
+    graf_res[1][x] = incorrect
+    graf_res[2][x] = accuracy
+    graf_res[3][x] = cost
 
 print (tabulate(res[1:], headers=res[0]))
 ```
