@@ -13,6 +13,7 @@ di Nicole Stolbovoi [MAT. 709168] e Luca Zeverino [MAT. 698710]
      2.2 [Perceptron](#2.2.2)  
      2.3 [Gaussian Naive Bayes](#2.2.3)  
      2.4 [KNearest Neighbors](#2.2.4)  
+     2.5 [Logistic Regression](#2.2.5)  
 
 ### 3. [Modellazione](#3)          
  1. [Importazione delle librerie](#3.1)          
@@ -55,7 +56,7 @@ I vantaggi delle macchine a vettore di supporto sono:
  - Efficace in spazi ad alta dimensione. 
  - Efficace nei casi in cui il numero di dimensioni è maggiore del numero di campioni. 
 
-Utilizza un sottoinsieme di punti di addestramento nella funzione decisionale (chiamati vettori di supporto), quindi è anche efficiente in termini di memoria.
+<p align="justify">Utilizza un sottoinsieme di punti di addestramento nella funzione decisionale (chiamati vettori di supporto), quindi è anche efficiente in termini di memoria.
  
 Gli svantaggi delle macchine vettoriali di supporto includono: 
  - Se il numero di funzionalità è molto maggiore del numero di campioni, evitare un adattamento eccessivo nella scelta delle funzioni del kernel e il termine di regolarizzazione è   fondamentale. 
@@ -68,18 +69,28 @@ SVC è una classe in grado di eseguire la classificazione binaria e multiclasse 
 ### <span id = "2.2.3">2.2.3 Gaussian Naive Bayes</span>
 <p align="justify">I metodi Naive Bayes sono un insieme di algoritmi di apprendimento supervisionato basati sull'applicazione del teorema di Bayes con l'assunzione "ingenua" dell'indipendenza condizionale tra ogni coppia di caratteristiche dato il valore della variabile di classe.
 
-Nonostante i loro presupposti semplificati, i classificatori naive di Bayes hanno funzionato abbastanza bene in molte situazioni del mondo reale, notoriamente la classificazione dei documenti e il filtraggio dello spam. Richiedono una piccola quantità di dati di addestramento per stimare i parametri necessari. I learner e i classificatori di Naive Bayes possono essere estremamente veloci rispetto a metodi più sofisticati. Il disaccoppiamento delle distribuzioni delle caratteristiche condizionali di classe significa che ciascuna distribuzione può essere stimata in modo indipendente come una distribuzione unidimensionale. Questo a sua volta aiuta ad alleviare i problemi derivanti dalla maledizione della dimensionalità. D'altra parte, sebbene il Naive Bayes sia noto come un classificatore discreto, è noto per essere un cattivo stimatore, quindi i risultati di probabilità non devono essere presi troppo sul serio.
+<p align="justify">Nonostante i loro presupposti semplificati, i classificatori naive di Bayes hanno funzionato abbastanza bene in molte situazioni del mondo reale, notoriamente la classificazione dei documenti e il filtraggio dello spam. Richiedono una piccola quantità di dati di addestramento per stimare i parametri necessari. I learner e i classificatori di Naive Bayes possono essere estremamente veloci rispetto a metodi più sofisticati. Il disaccoppiamento delle distribuzioni delle caratteristiche condizionali di classe significa che ciascuna distribuzione può essere stimata in modo indipendente come una distribuzione unidimensionale. Questo a sua volta aiuta ad alleviare i problemi derivanti dalla maledizione della dimensionalità. D'altra parte, sebbene il Naive Bayes sia noto come un classificatore discreto, è noto per essere un cattivo stimatore, quindi i risultati di probabilità non devono essere presi troppo sul serio.
 
 `GaussianNB` implementa l'algoritmo Gaussian Naive Bayes per la classificazione.
 
 ### <span id = "2.2.4">2.2.4 KNearest Neighbors</span>
 <p align="justify">Il principio alla base dei metodi del vicino più vicino è trovare un numero predefinito di campioni di addestramento più vicini alla distanza al nuovo punto e prevedere l'etichetta da questi. Il numero di campioni può essere una costante definita dall'utente (apprendimento del vicino più vicino k) o variare in base alla densità locale dei punti (apprendimento del vicino più vicino basato sul raggio). La distanza può, in generale, essere qualsiasi misura metrica: la distanza euclidea standard è la scelta più comune. I metodi basati sui vicini sono noti come metodi di apprendimento automatico non generalizzanti, poiché semplicemente "ricordano" tutti i suoi dati di addestramento (possibilmente trasformati in una struttura di indicizzazione veloce come un albero a sfere o un albero di KD). Nonostante la sua semplicità, i vicini più vicini hanno avuto successo in un gran numero di problemi di classificazione e regressione. Essendo un metodo non parametrico, ha spesso successo in situazioni di classificazione in cui il confine decisionale è molto irregolare.
 
-La classificazione basata sui vicini è un tipo di apprendimento basato su istanze o apprendimento non generalizzante: non tenta di costruire un modello interno generale, ma memorizza semplicemente istanze dei dati di addestramento. La classificazione è calcolata da un voto a maggioranza semplice dei vicini più vicini di ciascun punto: a un punto di interrogazione viene assegnata la classe di dati che ha il maggior numero di rappresentanti all'interno dei vicini più vicini del punto. scikit-learn implementa due diversi classificatori dei vicini più vicini: KNeighborsClassifier implementa l'apprendimento basato sui vicini più vicini di ciascun punto di query, dove è un valore intero specificato dall'utente. La classificazione -neighbors in KNeighborsClassifier è la tecnica più comunemente usata. La scelta ottimale del valore è fortemente dipendente dai dati: in generale un valore più grande sopprime gli effetti del rumore, ma rende meno distinti i confini della classificazione. 
- 
-La classificazione di base dei vicini più vicini utilizza pesi uniformi: ovvero, il valore assegnato a un punto di query viene calcolato da un voto a maggioranza semplice dei vicini più vicini. In alcune circostanze, è meglio ponderare i vicini in modo tale che i vicini più vicini contribuiscano di più all'adattamento. Questo può essere ottenuto attraverso la parola chiave weights. Il valore predefinito, weights = 'uniform', assegna pesi uniformi a ciascun neighbor. pesi = 'distanza' assegna pesi proporzionali all'inverso della distanza dal punto di interrogazione. In alternativa, è possibile fornire una funzione definita dall'utente della distanza per calcolare i pesi.
+<p align="justify">La classificazione basata sui vicini è un tipo di apprendimento basato su istanze o apprendimento non generalizzante: non tenta di costruire un modello interno generale, ma memorizza semplicemente istanze dei dati di addestramento. La classificazione è calcolata da un voto a maggioranza semplice dei vicini più vicini di ciascun punto: a un punto di interrogazione viene assegnata la classe di dati che ha il maggior numero di rappresentanti all'interno dei vicini più vicini del punto. scikit-learn implementa due diversi classificatori dei vicini più vicini: KNeighborsClassifier implementa l'apprendimento basato sui vicini più vicini di ciascun punto di query, dove è un valore intero specificato dall'utente. La classificazione -neighbors in KNeighborsClassifier è la tecnica più comunemente usata. La scelta ottimale del valore è fortemente dipendente dai dati: in generale un valore più grande sopprime gli effetti del rumore, ma rende meno distinti i confini della classificazione. 
 
-<p align="justify">Quali sono gli svantaggi della classificazione k-neighbor più vicino? Uno è che è abbastanza lento dover attraversare e misurare la distanza tra un punto e ognuno di questi punti vicini. Ma ci sono modi per cercare di aggirarlo. Esistono strutture di dati che possono aiutare a rendere più rapidamente possibile trovare questi vicini. Ci sono anche tecniche che puoi usare per provare a sfoltire alcuni di questi dati, rimuovere alcuni dei punti dati in modo da rimanere solo con i punti dati rilevanti solo per renderlo un po' più semplice.
+<p align="justify">Gli svantaggi di questa classificazione è che è abbastanza lento dover attraversare e misurare la distanza tra un punto e ognuno di questi punti vicini. Ma ci sono modi per cercare di aggirarlo. Esistono strutture di dati che possono aiutare a rendere più rapidamente possibile trovare i vicini.
+ 
+Un modo per determinare la classe di una banconota sconosciuta è confrontarla con banconote che abbiano variabili simili. K è il numero di confronti utilizzati per predire la banconota sconosciuta. Valutiamo i dati con K=1 e risulta molto efficace! KNN con K=1 ha classificato le banconote con una precisione del 100%. Il modello di apprendimento automatico funziona meglio a valori bassi di K, all'aumentare di K diminuisce anche l'accuratezza.
+
+### <span id = "2.2.5">2.2.5 Logistic Regression</span>
+<p align="justify">La regressione logistica, nonostante il suo nome, è un modello lineare per la classificazione piuttosto che la regressione. In questo modello, le probabilità che descrivono i possibili esiti di una singola prova sono modellate utilizzando una funzione logistica.
+ 
+Questa divide i dati in due parti. Per visualizzare come funziona, tracciamo i primi due attributi. Le regioni della trama in verde mostrano un'alta probabilità di essere autentiche; il magenta mostra un'alta probabilità di essere contraffatto. I punti dati nella regione bianca hanno una probabilità del 50-50 di essere autentici.
+ 
+Il modello di regressione logistica predice l'autenticità delle banconote con elevata precisione. 
+ 
+![LogisticRegression](graphs/probability_logistic_regression.png)
+
 <p><a href="#top">Torna all'inizio</a>
 
 # <span id = "3">3.Modellazione e analisi</span>
@@ -229,9 +240,9 @@ print (tabulate(res[1:], headers=res[0]))
 <p><a href="#top">Torna all'inizio</a>
 
 # <span id = "4">4. Conclusioni</span>
-<p align="justify">In questo progetto abbiamo spiegato come abbiamo risolto il problema dell'autenticazione delle banconote utilizzando tecniche di machine learning. Abbiamo confrontato quattro diversi algoritmi in termini di prestazioni e abbiamo concluso che gli algoritmi KNN e SVM sono i migliori algoritmi per l'autenticazione delle banconote con una precisione del 100% e del 99,45%.</p>
-<p><a href="#top">Torna all'inizio</a>
+<p align="justify">In questo progetto abbiamo spiegato come abbiamo risolto il problema dell'autenticazione delle banconote utilizzando tecniche di machine learning. Abbiamo confrontato quattro diversi algoritmi in termini di prestazioni e abbiamo concluso che gli algoritmi KNN e SVM sono i migliori algoritmi per l'autenticazione delle banconote con una precisione del 100% e del 99,64%.</p>
 
+<p align="justify">In conclusione è importante valutare anche il costo di questi algoritmi in quanto migliori performance si traducono in costi computazionali maggiori e quindi lentezza.
 
 ```
 Model           Correct    Incorrect    Accuracy (%)    Cost (ms)
@@ -242,3 +253,4 @@ KNeighborsCl        548            0          100              62
 GaussianNB          465           83           84.85            6
 LogisticRegr        543            5           99.09           24
 ```
+<p><a href="#top">Torna all'inizio</a>
