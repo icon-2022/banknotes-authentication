@@ -7,7 +7,7 @@ import time
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+from albero import decision_tree_classifier
 
 
 from tabulate import tabulate
@@ -85,11 +85,11 @@ model = None
 
 res = array([
     ['Model','Correct','Incorrect','Accuracy (%)','Cost (ms)'],
-    [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
+    [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
 
-graf_res = array([[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]])
+graf_res = array([[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]])
 
-for x in range(5):
+for x in range(6):
 
     if x == 0:
         model = Perceptron()
@@ -101,39 +101,55 @@ for x in range(5):
         model = GaussianNB()
     if x == 4:
         model = LogisticRegression()
+    if x == 5:
+        dcf = decision_tree_classifier()
 
-    t = time.process_time()
+        correct = dcf[1]
+        incorrect = dcf[2]
+        accuracy = dcf[3]
+        cost = dcf[4]
 
-    # Train model on training set
-    X_training = [row["evidence"] for row in training]
-    y_training = [row["label"] for row in training]
-    model.fit(X_training, y_training)
+        res[x+1][0] = dcf[0][:12]
+        res[x+1][1] = correct
+        res[x+1][2] = incorrect
+        res[x+1][3] = f"{accuracy:.2f}"
+        res[x+1][4] = cost
 
-    # Make predictions on the testing set
-    X_testing = [row["evidence"] for row in testing]
-    y_testing = [row["label"] for row in testing]
-    predictions = model.predict(X_testing)
 
-    # Compute how well we performed
-    correct = 0
-    incorrect = 0
-    total = 0
-    for actual, predicted in zip(y_testing, predictions):
-        total += 1
-        if actual == predicted:
-            correct += 1
-        else:
-            incorrect += 1
+    if x != 5:
 
-    # Print results
-    accuracy = 100 * correct / total
-    cost = int(1000 * (time.process_time() - t))
+        t = time.process_time()
 
-    res[x+1][0] = (type(model).__name__)[:12]
-    res[x+1][1] = correct
-    res[x+1][2] = incorrect
-    res[x+1][3] = f"{accuracy:.2f}"
-    res[x+1][4] = cost
+        # Train model on training set
+        X_training = [row["evidence"] for row in training]
+        y_training = [row["label"] for row in training]
+        model.fit(X_training, y_training)
+
+        # Make predictions on the testing set
+        X_testing = [row["evidence"] for row in testing]
+        y_testing = [row["label"] for row in testing]
+        predictions = model.predict(X_testing)
+
+        # Compute how well we performed
+        correct = 0
+        incorrect = 0
+        total = 0
+        for actual, predicted in zip(y_testing, predictions):
+            total += 1
+            if actual == predicted:
+                correct += 1
+            else:
+                incorrect += 1
+
+        # Print results
+        accuracy = 100 * correct / total
+        cost = int(1000 * (time.process_time() - t))
+
+        res[x+1][0] = (type(model).__name__)[:12]
+        res[x+1][1] = correct
+        res[x+1][2] = incorrect
+        res[x+1][3] = f"{accuracy:.2f}"
+        res[x+1][4] = cost
 
     # Res for graphs
     graf_res[0][x] = correct
@@ -141,8 +157,13 @@ for x in range(5):
     graf_res[2][x] = accuracy
     graf_res[3][x] = cost
 
-
-print (tabulate(res[1:], headers=res[0]))
+r = pd.DataFrame(data=res[1:], columns=res[0])
+r['Accuracy (%)'] = r['Accuracy (%)'].astype(float)
+r1 = r.sort_values(by=['Accuracy (%)'], ascending=False)
+r1.reset_index(drop=True, inplace=True)
+print ("\t\t\t\tRank by accuracy")
+print (tabulate(r1[0:], headers=res[0]))
+# print (tabulate(res[1:], headers=res[0]))
 
 nomi_graf = [x[0] for x in res[1:]]
 
@@ -191,8 +212,8 @@ plt.savefig('graphs/graph_cost.png')
 plt.close()
 
 ax1 = plt.subplot(1,1,1)
-w=0.3
-plt.xticks(x_pos + w /2, nomi_graf)
+w=0.4
+plt.xticks(x_pos + w /2, nomi_graf, rotation=15)
 acc = ax1.bar(x_pos, graf_res[2], width=w, color='b', align='center')
 ax2 = ax1.twinx()
 cost = ax2.bar(x_pos + w, graf_res[3], width=w, color='y', align='center')
