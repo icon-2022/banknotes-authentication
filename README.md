@@ -1,7 +1,7 @@
 # banknotes-authentication
 
 
-Stolbovoi Nicole    [MAT. 709168]    n.stolbovoi@studenti.uniba.it 
+Stolbovoi Nicole    [MAT. 709168]    n.stolbovoi@studenti.uniba.it
 
 Zeverino Luca       [MAT. 698710]    l.zeverino1@studenti.uniba.it
 
@@ -55,18 +55,18 @@ Zeverino Luca       [MAT. 698710]    l.zeverino1@studenti.uniba.it
 
 ### <span id = "2.2.1">2.2.1 Support Vector Machine</span>
 <p align="justify">Le macchine a vettori di supporto (SVM, dall'inglese Support Vector Machines) sono dei modelli di apprendimento supervisionato associati ad algoritmi di apprendimento per la regressione e la classificazione. Dato un insieme di esempi per l'addestramento, ognuno dei quali etichettato con la classe di appartenenza fra le due possibili classi, un algoritmo di addestramento per le SVM costruisce un modello che assegna i nuovi esempi a una delle due classi, ottenendo quindi un classificatore lineare binario non probabilistico. Un modello SVM è una rappresentazione degli esempi come punti nello spazio, mappati in modo tale che gli esempi appartenenti alle due diverse categorie siano chiaramente separati da uno spazio il più possibile ampio. I nuovi esempi sono quindi mappati nello stesso spazio e la predizione della categoria alla quale appartengono viene fatta sulla base del lato nel quale ricade.
- 
-I vantaggi delle macchine a vettore di supporto sono: 
- - Efficace in spazi ad alta dimensione. 
- - Efficace nei casi in cui il numero di dimensioni è maggiore del numero di campioni. 
+
+I vantaggi delle macchine a vettore di supporto sono:
+ - Efficace in spazi ad alta dimensione.
+ - Efficace nei casi in cui il numero di dimensioni è maggiore del numero di campioni.
 
 <p align="justify">Utilizza un sottoinsieme di punti di addestramento nella funzione decisionale (chiamati vettori di supporto), quindi è anche efficiente in termini di memoria.
- 
-Gli svantaggi delle macchine vettoriali di supporto includono: 
- - Se il numero di funzionalità è molto maggiore del numero di campioni, evitare un adattamento eccessivo nella scelta delle funzioni del kernel e il termine di regolarizzazione è   fondamentale. 
+
+Gli svantaggi delle macchine vettoriali di supporto includono:
+ - Se il numero di funzionalità è molto maggiore del numero di campioni, evitare un adattamento eccessivo nella scelta delle funzioni del kernel e il termine di regolarizzazione è   fondamentale.
 
 SVC è una classe in grado di eseguire la classificazione binaria e multiclasse su un dataset.
- 
+
 ### <span id = "2.2.2">2.2.2 Perceptron</span>
 <p align="justify">Il Perceptron è un altro algoritmo di classificazione supervisionato di classificatori binari adatto per l'apprendimento su larga scala. Un classificatore binario è una funzione che può decidere se un input, rappresentato da un vettore di numeri, appartiene o meno a una classe specifica. È un tipo di classificatore lineare, ovvero un algoritmo di classificazione che effettua le sue previsioni sulla base di una funzione predittrice lineare che combina un insieme di pesi con il vettore delle caratteristiche.
 
@@ -80,19 +80,19 @@ SVC è una classe in grado di eseguire la classificazione binaria e multiclasse 
 ### <span id = "2.2.4">2.2.4 KNearest Neighbors</span>
 <p align="justify">Il principio alla base dei metodi del vicino più vicino è trovare un numero predefinito di campioni di addestramento più vicini alla distanza al nuovo punto e prevedere l'etichetta da questi. Il numero di campioni può essere una costante definita dall'utente (apprendimento del vicino più vicino k) o variare in base alla densità locale dei punti (apprendimento del vicino più vicino basato sul raggio). La distanza può, in generale, essere qualsiasi misura metrica: la distanza euclidea standard è la scelta più comune. I metodi basati sui vicini sono noti come metodi di apprendimento automatico non generalizzanti, poiché semplicemente "ricordano" tutti i suoi dati di addestramento (possibilmente trasformati in una struttura di indicizzazione veloce come un albero a sfere o un albero di KD). Nonostante la sua semplicità, i vicini più vicini hanno avuto successo in un gran numero di problemi di classificazione e regressione. Essendo un metodo non parametrico, ha spesso successo in situazioni di classificazione in cui il confine decisionale è molto irregolare.
 
-<p align="justify">La classificazione basata sui vicini è un tipo di apprendimento basato su istanze o apprendimento non generalizzante: non tenta di costruire un modello interno generale, ma memorizza semplicemente istanze dei dati di addestramento. La classificazione è calcolata da un voto a maggioranza semplice dei vicini più vicini di ciascun punto: a un punto di interrogazione viene assegnata la classe di dati che ha il maggior numero di rappresentanti all'interno dei vicini più vicini del punto. scikit-learn implementa due diversi classificatori dei vicini più vicini: KNeighborsClassifier implementa l'apprendimento basato sui vicini più vicini di ciascun punto di query, dove è un valore intero specificato dall'utente. La classificazione -neighbors in KNeighborsClassifier è la tecnica più comunemente usata. La scelta ottimale del valore è fortemente dipendente dai dati: in generale un valore più grande sopprime gli effetti del rumore, ma rende meno distinti i confini della classificazione. 
+<p align="justify">La classificazione basata sui vicini è un tipo di apprendimento basato su istanze o apprendimento non generalizzante: non tenta di costruire un modello interno generale, ma memorizza semplicemente istanze dei dati di addestramento. La classificazione è calcolata da un voto a maggioranza semplice dei vicini più vicini di ciascun punto: a un punto di interrogazione viene assegnata la classe di dati che ha il maggior numero di rappresentanti all'interno dei vicini più vicini del punto. scikit-learn implementa due diversi classificatori dei vicini più vicini: KNeighborsClassifier implementa l'apprendimento basato sui vicini più vicini di ciascun punto di query, dove è un valore intero specificato dall'utente. La classificazione -neighbors in KNeighborsClassifier è la tecnica più comunemente usata. La scelta ottimale del valore è fortemente dipendente dai dati: in generale un valore più grande sopprime gli effetti del rumore, ma rende meno distinti i confini della classificazione.
 
 <p align="justify">Gli svantaggi di questa classificazione è che è abbastanza lento dover attraversare e misurare la distanza tra un punto e ognuno di questi punti vicini. Ma ci sono modi per cercare di aggirarlo. Esistono strutture di dati che possono aiutare a rendere più rapidamente possibile trovare i vicini.
- 
+
 Un modo per determinare la classe di una banconota sconosciuta è confrontarla con banconote che abbiano variabili simili. K è il numero di confronti utilizzati per predire la banconota sconosciuta. Valutiamo i dati con K=1 e risulta molto efficace! KNN con K=1 ha classificato le banconote con una precisione del 100%. Il modello di apprendimento automatico funziona meglio a valori bassi di K, all'aumentare di K diminuisce anche l'accuratezza.
 
 ### <span id = "2.2.5">2.2.5 Logistic Regression</span>
 <p align="justify">La regressione logistica, nonostante il suo nome, è un modello lineare per la classificazione piuttosto che la regressione. In questo modello, le probabilità che descrivono i possibili esiti di una singola prova sono modellate utilizzando una funzione logistica.
- 
+
 Questa divide i dati in due parti. Per visualizzare come funziona, tracciamo i primi due attributi. Le regioni della trama in verde mostrano un'alta probabilità di essere autentiche; il magenta mostra un'alta probabilità di essere contraffatto. I punti dati nella regione bianca hanno una probabilità del 50-50 di essere autentici.
- 
-Il modello di regressione logistica predice l'autenticità delle banconote con elevata precisione. 
- 
+
+Il modello di regressione logistica predice l'autenticità delle banconote con elevata precisione.
+
 ![LogisticRegression](graphs/probability_logistic_regression.png)
 
 <p><a href="#top">Torna all'inizio</a>
@@ -241,7 +241,7 @@ e infine stampiamo l'accuratezza del modello per migliorarne la comprensione:
     res[x+1][2] = incorrect
     res[x+1][3] = f"{accuracy:.2f}"
     res[x+1][4] = cost
- 
+
     # Res for graphs
     graf_res[0][x] = correct
     graf_res[1][x] = incorrect
@@ -264,6 +264,27 @@ SVC                 546            2           99.64           16
 KNeighborsCl        548            0          100              62
 GaussianNB          465           83           84.85            6
 LogisticRegr        543            5           99.09           24
+
+New:
+
+              Dataset samples
+variance  skewness  curtosis  entropy  class
+0  -0.89569   3.00250 -3.606700 -3.44570      1
+1   3.47690  -0.15314  2.530000  2.44950      0
+2   3.91020   6.06500 -2.453400 -0.68234      0
+3   0.60731   3.95440 -4.772000 -4.48530      1
+4   2.37180   7.49080  0.015989 -1.74140      0
+
+                            Rank by accuracy
+Model           Correct    Incorrect    Accuracy (%)    Cost (ms)
+--  ------------  ---------  -----------  --------------  -----------
+0  KNeighborsCl        548            0          100              60
+1  SVC                 547            1           99.82           16
+2  LogisticRegr        543            5           99.09           24
+3  Perceptron          540            8           98.54            7
+4  DecisionTree        501           47           91.42           12
+5  GaussianNB          466           82           85.04            6
+
 ```
 
 Per maggior leggibilità possiamo vedere le risposte corrette e incorrette degli algoritmi in questo grafico:
@@ -271,7 +292,7 @@ Per maggior leggibilità possiamo vedere le risposte corrette e incorrette degli
 ![CorrectIncorrect](graphs/graph_cor_inc.png)
 
 <p align="justify">In conclusione è importante valutare anche il costo di questi algoritmi in quanto migliori performance si traducono in costi computazionali maggiori e quindi lentezza. Il costo è misurato come tempo di esecuzione del modello in millisecondi
- 
+
 ![AccuracyCost](graphs/graph_acc_cost.png)
 
 <p><a href="#top">Torna all'inizio</a>

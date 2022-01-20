@@ -11,10 +11,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 
-"""
-Inspiration:
-https://ichi.pro/it/alberi-decisionali-in-machine-learning-ml-con-python-tutorial-65950388571751
-"""
 
 def decision_tree_classifier(debug = False):
 
