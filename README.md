@@ -17,6 +17,7 @@ Zeverino Luca       [MAT. 698710]    l.zeverino1@studenti.uniba.it
      2.3 [Gaussian Naive Bayes](#2.2.3)  
      2.4 [KNearest Neighbors](#2.2.4)  
      2.5 [Logistic Regression](#2.2.5)  
+     2.6 [Decision Tree](#2.2.6)  
 
 ### 3. [Modellazione](#3)          
  1. [Importazione delle librerie](#3.1)          
@@ -94,6 +95,9 @@ Questa divide i dati in due parti. Per visualizzare come funziona, tracciamo i p
 Il modello di regressione logistica predice l'autenticità delle banconote con elevata precisione.
 
 ![LogisticRegression](graphs/probability_logistic_regression.png)
+ 
+### <span id = "2.2.6">2.2.6 Decision Tree</span>
+
 
 <p><a href="#top">Torna all'inizio</a>
 
@@ -112,8 +116,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-
-
 from tabulate import tabulate
 from numpy import *
 ```
@@ -126,10 +128,11 @@ from sklearn.linear_model import Perceptron
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
+from albero import decision_tree_classifier
 
 ︙
 
-for x in range(5):
+for x in range(6):
 
     if x == 0:
         model = Perceptron()
@@ -141,6 +144,8 @@ for x in range(5):
         model = GaussianNB()
     if x == 4:
         model = LogisticRegression()
+    if x == 5:
+        dcf = decision_tree_classifier()
 ```
 
 <p align="justify">Si noti che dopo aver importato gli algoritmi, possiamo scegliere quale modello utilizzare. Il resto del codice rimarrà lo stesso.</p>
@@ -257,24 +262,6 @@ print (tabulate(res[1:], headers=res[0]))
 <p align="justify">In questo progetto abbiamo spiegato come abbiamo risolto il problema dell'autenticazione delle banconote utilizzando tecniche di machine learning. Abbiamo confrontato quattro diversi algoritmi in termini di prestazioni e abbiamo concluso che gli algoritmi KNN e SVM sono i migliori algoritmi per l'autenticazione delle banconote con una precisione del 100% e del 99,64%.</p>
 
 ```
-Model           Correct    Incorrect    Accuracy (%)    Cost (ms)
-------------  ---------  -----------  --------------  -----------
-Perceptron          542            6           98.91            7
-SVC                 546            2           99.64           16
-KNeighborsCl        548            0          100              62
-GaussianNB          465           83           84.85            6
-LogisticRegr        543            5           99.09           24
-
-New:
-
-              Dataset samples
-variance  skewness  curtosis  entropy  class
-0  -0.89569   3.00250 -3.606700 -3.44570      1
-1   3.47690  -0.15314  2.530000  2.44950      0
-2   3.91020   6.06500 -2.453400 -0.68234      0
-3   0.60731   3.95440 -4.772000 -4.48530      1
-4   2.37180   7.49080  0.015989 -1.74140      0
-
                             Rank by accuracy
 Model           Correct    Incorrect    Accuracy (%)    Cost (ms)
 --  ------------  ---------  -----------  --------------  -----------
@@ -284,6 +271,15 @@ Model           Correct    Incorrect    Accuracy (%)    Cost (ms)
 3  Perceptron          540            8           98.54            7
 4  DecisionTree        501           47           91.42           12
 5  GaussianNB          466           82           85.04            6
+
+
+              Dataset samples
+variance  skewness  curtosis  entropy  class
+0  -0.89569   3.00250 -3.606700 -3.44570      1
+1   3.47690  -0.15314  2.530000  2.44950      0
+2   3.91020   6.06500 -2.453400 -0.68234      0
+3   0.60731   3.95440 -4.772000 -4.48530      1
+4   2.37180   7.49080  0.015989 -1.74140      0
 
 ```
 
