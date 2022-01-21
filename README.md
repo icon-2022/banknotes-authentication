@@ -97,7 +97,7 @@ Il modello di regressione logistica predice l'autenticità delle banconote con e
 ![LogisticRegression](graphs/probability_logistic_regression.png)
  
 ### <span id = "2.2.6">2.2.6 Decision Tree</span>
-
+![Tree](graphs/tree.png)
 
 <p><a href="#top">Torna all'inizio</a>
 
