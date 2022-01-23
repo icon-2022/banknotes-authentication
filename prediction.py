@@ -10,7 +10,7 @@ from pybbn.pptc.inferencecontroller import InferenceController
 #l'utente segue una dieta?
 segueDieta = BbnNode(Variable(0, 'segue dieta', ['si', 'no']), [0.75, 0.25])
 
-#l'utente la segue in maniera ferrea
+#l'utente segue fedelmente la dieta
 serietàDieta = BbnNode(Variable(1, 'serietà dieta', ['alta', 'media', 'bassa']), [0.80, 0.15, 0.05])
 
 #nodo di presentazione principale
