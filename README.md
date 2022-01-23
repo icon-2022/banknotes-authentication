@@ -95,7 +95,7 @@ Questa divide i dati in due parti. Per visualizzare come funziona, tracciamo i p
 Il modello di regressione logistica predice l'autenticità delle banconote con elevata precisione.
 
 ![LogisticRegression](graphs/probability_logistic_regression.png)
- 
+
 ### <span id = "2.2.6">2.2.6 Decision Tree</span>
 ![Tree](graphs/tree.png)
 
@@ -280,6 +280,24 @@ variance  skewness  curtosis  entropy  class
 2   3.91020   6.06500 -2.453400 -0.68234      0
 3   0.60731   3.95440 -4.772000 -4.48530      1
 4   2.37180   7.49080  0.015989 -1.74140      0
+
+
+
+KB test
+
+
+Positive test
+[{'Class': 'authentic1', 'Result': 'Yes'},
+ {'Class': 'authentic2', 'Result': 'No'},
+ {'Class': 'authentic4', 'Result': 'No'},
+ {'Class': 'authentic3', 'Result': 'No'}]
+
+Negative test
+[{'Class': 'authentic1', 'Result': 'No'},
+ {'Class': 'authentic2', 'Result': 'No'},
+ {'Class': 'authentic4', 'Result': 'No'},
+ {'Class': 'authentic3', 'Result': 'No'}]
+
 
 ```
 
