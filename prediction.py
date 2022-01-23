@@ -13,7 +13,7 @@ segueDieta = BbnNode(Variable(0, 'segue dieta', ['si', 'no']), [0.75, 0.25])
 #l'utente la segue in maniera ferrea
 serietàDieta = BbnNode(Variable(1, 'serietà dieta', ['alta', 'media', 'bassa']), [0.80, 0.15, 0.05])
 
-#nodo di presentazione principale (1-2)
+#nodo di presentazione principale
 valorePersonale = BbnNode(Variable(2, 'valore personale', ['ottimo', 'scarso']),
                           [0.90, 0.10, 0.60, 0.40, 0.51, 0.49, 0.6, 0.4, 0.15, 0.85, 0.05, 0.95])
 #l'utente è interessato a migliorare la propria condizione fisica
@@ -22,25 +22,25 @@ interesseMiglioramento = BbnNode(Variable(3, 'interesse miglioramento', ['si', '
 #l'utente ha mai fatto sport?
 esperienzaSportiva = BbnNode(Variable(4, 'esperienza sportiva', ['si', 'no']), [0.71, 0.29])
 
-#nodo per un primo profilo dell'utente (2-5)
-punteggioPersonale = BbnNode(Variable(6, 'punteggio personale', ['ottimo', 'scarso']), [0.99, 0.01, 0.72, 0.28, 0.32,
+#nodo per un primo profilo dell'utente
+punteggioPersonale = BbnNode(Variable(5, 'punteggio personale', ['ottimo', 'scarso']), [0.99, 0.01, 0.72, 0.28, 0.32,
                                                                                         0.68, 0.02, 0.98])
 #All'utente piace praticare sport?
-gradimentoSport = BbnNode(Variable(7, 'gradimento sport', ['si', 'no']), [0.93, 0.07])
+gradimentoSport = BbnNode(Variable(6, 'gradimento sport', ['si', 'no']), [0.93, 0.07])
 
 #L'utente pratica attualmente sport?
-praticaSport = BbnNode(Variable(8, 'pratica sport', ['si', 'no']), [0.85, 0.15])
+praticaSport = BbnNode(Variable(7, 'pratica sport', ['si', 'no']), [0.85, 0.15])
 
-#nodo per la conoscenza dei linguaggi (7-8)
-valoreSportivo = BbnNode(Variable(9, 'valore sportivo', ['ottima', 'scarsa']), [0.93, 0.07, 0.83, 0.17,
+#nodo per il vincolo sportivo
+valoreSportivo = BbnNode(Variable(8, 'valore sportivo', ['ottima', 'scarsa']), [0.93, 0.07, 0.83, 0.17,
                                                                                           0.52, 0.48, 0.12, 0.88])
 
-#nodo per il vincolo lavorativo (9-12)
-valoreGlobale = BbnNode(Variable(13, 'valore globale', ['ottimo', 'scarso']), [0.95, 0.05, 0.68, 0.32, 0.51,
+#nodo per il vincolo globale
+valoreGlobale = BbnNode(Variable(9, 'valore globale', ['ottimo', 'scarso']), [0.95, 0.05, 0.68, 0.32, 0.51,
                                                                                      0.49, 0.06, 0.94])
 
-#previsione finale della % di essere assunti (6-13)
-previsioneObiettivi = BbnNode(Variable(14, 'previsione raggiungimento obiettivi', ['si', 'no']), [0.99, 0.01, 0.72, 0.28, 0.3, 0.7,
+#previsione finale della % di raggiungere l'obiettivo
+previsioneObiettivi = BbnNode(Variable(10, 'previsione raggiungimento obiettivi', ['si', 'no']), [0.99, 0.01, 0.72, 0.28, 0.3, 0.7,
                                                                                      0.2, 0.8])
 
 bbn = Bbn() \
