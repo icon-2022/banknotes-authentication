@@ -1,5 +1,8 @@
 import prediction as pr
 import classifier as cl
+import pazienti as pz
 
-cl.domanda()
-pr.prediction()
+pz.nuovoPaziente()
+pz.listaPazienti()
+#cl.domanda()
+#pr.prediction()
