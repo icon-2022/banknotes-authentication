@@ -7,6 +7,8 @@ import time
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import seaborn as sns
+
 from albero import decision_tree_classifier
 
 
@@ -18,6 +20,27 @@ from sklearn.linear_model import Perceptron
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier, GradientBoostingClassifier, ExtraTreesClassifier
+from sklearn.model_selection import train_test_split, cross_val_score, KFold, GridSearchCV
+
+data = pd.read_csv("banknotes.csv")
+
+col_names = data.drop('class', axis = 1).columns.tolist()
+
+plt.figure(figsize = (10,3))
+i = 0
+for col in col_names:
+    plt.subplot(1,4,i+1)
+    plt.grid(True, alpha =0.5)
+    sns.kdeplot(data[col][data['class'] ==0], label = 'Counterfeit')
+    sns.kdeplot(data[col][data['class'] ==1], label = 'Authentic')
+    plt.title('Class vs ' + col)
+    plt.tight_layout()
+    i+=1
+plt.savefig('graphs/density.png')
+plt.close()
+
 
 # Read data in from file
 with open("banknotes.csv") as f:
@@ -85,24 +108,55 @@ model = None
 
 res = array([
     ['Model','Correct','Incorrect','Accuracy (%)','Cost (ms)'],
-    [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0] ])
+    [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0], [0,0,0,0,0],
+    [0,0,0,0,0] ])
 
-graf_res = array([[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]])
+graf_res = array([[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0,]])
 
+
+acc_result = []
+auc_result = []
+names = []
+
+col = ['Model', 'ROC AUC Mean','ROC AUC Std','ACC Mean', 'ACC Std']
+result = pd.DataFrame(columns = col)
+j= 0
 for x in range(6):
 
     if x == 0:
         model = Perceptron()
+        n = "PRC"
     if x == 1:
         model = svm.SVC()
+        n = "SVM"
     if x == 2:
         model = KNeighborsClassifier(n_neighbors=1)
+        n = "KNN"
     if x == 3:
         model = GaussianNB()
+        n = "GNB"
     if x == 4:
         model = LogisticRegression()
+        n = "LR"
+
+    """
+    if x == 6:
+        model = LinearDiscriminantAnalysis()
+        n = "LDA"
+    if x == 7:
+        model = RandomForestClassifier()
+        n = "RF"
+    if x == 8:
+        model = AdaBoostClassifier()
+        n = "ADA"
+    if x == 9:
+        model = GradientBoostingClassifier()
+        n = "GB"
+    """
+
     if x == 5:
         dcf = decision_tree_classifier()
+        n = "DT"
 
         correct = dcf[1]
         incorrect = dcf[2]
@@ -118,11 +172,30 @@ for x in range(6):
 
     if x != 5:
 
-        t = time.process_time()
-
         # Train model on training set
         X_training = [row["evidence"] for row in training]
         y_training = [row["label"] for row in training]
+
+        kfold = KFold(n_splits = 10, random_state = 7, shuffle=True)
+        cv_acc_result  = cross_val_score(model, X_training, y_training, cv = kfold, scoring = 'accuracy')
+        cv_auc_result  = cross_val_score(model, X_training, y_training, cv = kfold, scoring = 'roc_auc')
+
+        acc_result.append(cv_acc_result)
+        auc_result.append(cv_auc_result)
+
+        names.append(n)
+        result.loc[j] = [
+                (type(model).__name__)[:12],
+                cv_auc_result.mean(),
+                cv_auc_result.std(),
+                cv_acc_result.mean(),
+                cv_acc_result.std()]
+
+        result = result.sort_values('ROC AUC Mean', ascending = False)
+        result.reset_index(drop=True, inplace=True)
+        j+= 1
+
+        t = time.process_time()
         model.fit(X_training, y_training)
 
         # Make predictions on the testing set
@@ -163,7 +236,13 @@ r1 = r.sort_values(by=['Accuracy (%)'], ascending=False)
 r1.reset_index(drop=True, inplace=True)
 print ("\t\t\t\tRank by accuracy")
 print (tabulate(r1[0:], headers=res[0]))
-# print (tabulate(res[1:], headers=res[0]))
+# print (tabulate(res[1:], headers=res[0]))
+
+print("\n\t\t\tCross Validation Score")
+print(result)
+print("\n")
+
+
 
 nomi_graf = [x[0] for x in res[1:]]
 

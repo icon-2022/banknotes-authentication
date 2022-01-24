@@ -8,9 +8,19 @@
 				Rank by accuracy
     Model           Correct    Incorrect    Accuracy (%)    Cost (ms)
 --  ------------  ---------  -----------  --------------  -----------
- 0  KNeighborsCl        548            0          100              60
- 1  SVC                 547            1           99.82           16
- 2  LogisticRegr        543            5           99.09           24
- 3  Perceptron          540            8           98.54            7
- 4  DecisionTree        501           47           91.42           12
- 5  GaussianNB          466           82           85.04            6
+ 0  SVC                 547            1           99.82           15
+ 1  KNeighborsCl        547            1           99.82           60
+ 2  LogisticRegr        541            7           98.72           26
+ 3  Perceptron          521           27           95.07            6
+ 4  DecisionTree        501           47           91.42           13
+ 5  GaussianNB          453           95           82.66            7
+
+			Cross Validation Score
+          Model  ROC AUC Mean  ROC AUC Std  ACC Mean   ACC Std
+0           SVC      1.000000     0.000000  0.995151  0.008019
+1  KNeighborsCl      1.000000     0.000000  1.000000  0.000000
+2  LogisticRegr      0.999767     0.000466  0.990317  0.010548
+3    Perceptron      0.999644     0.000390  0.987878  0.010842
+4    GaussianNB      0.944708     0.021250  0.851984  0.051371
+
+
